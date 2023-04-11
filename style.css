@@ -1,13 +1,12 @@
-.top-bar {
-    background-color: #fbf7f2;
+#top-bar {
     height: 70px;
+    background-color: #fbf7f2;
     display: flex;
-    align-items: center;
     justify-content: center;
-    color: #000000;
+    align-items: center;
   }
   
-
-#top-bar p {
-    margin: 0;
-}
+  #top-bar span {
+    color: black;
+    font-size: 1.2rem;
+  }
