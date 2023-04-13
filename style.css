@@ -40,6 +40,16 @@ header {
   margin-right: 10px;
 }
 
+.menu-button span {
+  font-size: 24px; 
+  margin-left: 5px;
+}
+
+.search-box {
+  margin-left: 100px;
+  margin-right: 20px;
+}
+
 .search-box {
   border: 1px solid white;
   border-radius: 25px;
@@ -48,10 +58,15 @@ header {
 }
 
 .search-box input[type="text"] {
-  border: none;
-  outline: none;
-  font-size: 16px;
   width: 250px;
+  height: 40px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #5b200c;
+  padding: 0 10px;
+  font-size: 16px;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
 /* Header center styles */
