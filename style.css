@@ -1,7 +1,7 @@
 body {
   background-color: #fdf9f8;
 }
-
+/* Topo */
 .top-bar {
   background-color: #fbf7f2;
   height: 50px;
@@ -13,7 +13,7 @@ body {
   margin: 0;
   font-size: 1.2rem;
 }
-
+/* Logo */
 .logo-container {
   display: flex;
   justify-content: center;
@@ -23,4 +23,8 @@ body {
 .logo {
   max-width: 200px;
 }
+
+/* Menu */
+
+
 
