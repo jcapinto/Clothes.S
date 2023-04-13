@@ -15,7 +15,6 @@ body {
 }
 /* Logo */
 .logo-container {
-  display: flex;
   justify-content: center;
   margin-top: 50px;
 }
@@ -26,5 +25,23 @@ body {
 
 /* Menu */
 
+.menu-button {
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fdf9f8;
+  color: #502515;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-right: 20px;
+}
 
+.menu-content {
+  align-items: center;
+  gap: 10px;
+}
+
+.menu-content img {
+  width: 24px;
+  height: 24px;
+}
 
