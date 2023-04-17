@@ -31,16 +31,20 @@ body {
 }
 
 /* Estilos para o logo */
+
 .logo-container {
-  text-align: center;
-  margin-top: 10px;
-  width: 150px;
-  height: auto;
+  float: none;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .logo-img {
-  width: 150px;
+  max-width: 200px;
   height: auto;
+  display: block;
+  margin: 0 auto;
 }
 
 /* Estilos para os links do usuário */
