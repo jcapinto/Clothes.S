@@ -17,7 +17,8 @@ body {
 
 /* Estilos para o texto do menu */
 .menu-text {
-  margin-left: 5px;
+  margin-left: 2px;
+  color:#691a03;
 }
 
 /* Estilos para a caixa de pesquisa */
@@ -47,22 +48,40 @@ body {
   margin: 0 auto;
 }
 
-/* Estilos para os links do usuário */
-.user-links {
+/* Estilos para os user */
+.user-texts {
   float: right;
   margin-top: 10px;
 }
 
-/* Estilos para cada link do usuário */
-.user-link {
+/* Estilos para iso user */
+.user-text-ico {
   display: inline-block;
   margin-left: 10px;
   text-align: center;
 }
 
-/* Estilos para o texto de cada link do usuário */
-.user-link-text {
-  display: block;
+/* Estilos para o texto user */
+.user-text {
+  display: inline-block;
+  color:#691a03;
   font-size: 12px;
   margin-top: 5px;
+}
+
+/* Estilos para as secçoes */
+
+.top-sections {
+  padding: 10px;
+  text-align: left;
+}
+
+.sections-w {
+  color:#691a03;
+  margin-left: 20px;
+}
+
+.sections-m {
+  color:#691a03;
+  margin-left: 30px;
 }
