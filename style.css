@@ -90,3 +90,18 @@ body {
   color:#691a03;
   margin-left: 20px;
 }
+
+.promo-container {
+  float: none;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.promo-img {
+  max-width: 700px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
