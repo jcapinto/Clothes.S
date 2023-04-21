@@ -105,3 +105,31 @@ body {
   display: block;
   margin: 0 auto;
 }
+
+
+
+
+
+
+.visuti-img-text {
+  vertical-align: top;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+  padding: 10px;
+  font-size: 18px;
+}
+
+.adm-table {
+  border: 1px solid black;
+  border-collapse: collapse;
+  width: 50%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.adm-img {
+  max-width: 200px;
+  height: auto;
+  align-items: center;
+}
