@@ -16,77 +16,79 @@
     <p>Entrega GRÁTIS para compras superiores a 20€</p>
   </div>
   <!--Menu e ícone de pesquisa-->
-<table class="top-menu">
-  <tr>
-    <td>
-      <img src="img/menico.png" alt="Menu" width="25" height="25">
-      <span class="menu-text">Menu</span>
-    </td>
-    <td>
-      <input type="text" placeholder="Procurar produto" class="search-box">
-    </td>
-  </tr>
-</table>
-
-<!--Logo-->
-<div class="logo-container">
-  <img src="img/logo.png" alt="Logo" class="logo-img">
-</div>
-
-<!--Login, Favoritos e Saco de compras-->
-<div class="user-texts">
-  <a  class="user-text-ico">
-    <img src="img/logico.png" alt="Login" width="20" height="20">
-    <span class="user-text">Login</span>
-  </a>
-  <a  class="user-text-ico">
-    <img src="img/favico.png" alt="Favoritos" width="20" height="20">
-    <span class="user-text">Favoritos</span>
-  </a>
-  <a  class="user-text-ico">
-    <img src="img/carico.png" alt="Saco de compras" width="20" height="20">
-    <span class="user-text">Saco de compras (0)</span>
-  </a>
-</div>
-<p></p>
-<div class="top-sections">
-  <a  class="sections-w">
-    <span>Mulheres</span>
-  </a>
-  <a  class="sections-m">
-    <span>Homens</span>
-  </a>
-  <a href="admin.html"  class="sections-adm" >
-    <span>Administração</span>
-  </a>
-</div>
-<p></p>
-<p></p>
-<p></p>
-<div class="promo-container">
-  <img src="img/promo.png" alt="promo" class="promo-img">
-</div>
-<div id="login-popup">
-  <form>
-    <h2>Login</h2>
-    <label for="username">Username:</label>
-    <input type="text" id="username">
-    <label for="password">Password:</label>
-    <input type="password" id="password">
-    <button type="submit">Login</button>
-  </form>
-</div>
-<div id="login-popup">
-  <form>
-    <h2>Login</h2>
-    <label for="username">Username:</label>
-    <input type="text" id="username">
-    <label for="password">Password:</label>
-    <input type="password" id="password">
-    <button type="submit">Login</button>
-  </form>
-  <button id="close-popup">X</button>
-</div>
+  <table class="top-menu">
+    <tr>
+      <td>
+        <img src="img/menico.png" alt="Menu" width="25" height="25">
+        <span class="menu-text">Menu</span>
+      </td>
+      <td>
+        <input type="text" placeholder="Procurar produto" class="search-box">
+      </td>
+    </tr>
+  </table>
+  <!--Logo-->
+  <div class="logo-container">
+    <img src="img/logo.png" alt="Logo" class="logo-img">
+  </div>
+  <!--Login, Favoritos e Saco de compras-->
+  <div class="user-texts">
+    <a class="user-text-ico" href="#" onclick="showLoginPopup()">
+      <img src="img/logico.png" alt="Login" width="20" height="20">
+      <span class="user-text">Login</span>
+    </a>
+    <a class="user-text-ico">
+      <img src="img/favico.png" alt="Favoritos" width="20" height="20">
+      <span class="user-text">Favoritos</span>
+    </a>
+    <a class="user-text-ico">
+      <img src="img/carico.png" alt="Saco de compras" width="20" height="20">
+      <span class="user-text">Saco de compras (0)</span>
+    </a>
+  </div>
+  <p></p>
+  <div class="top-sections">
+    <a class="sections-w">
+      <span>Mulheres</span>
+    </a>
+    <a class="sections-m">
+      <span>Homens</span>
+    </a>
+    <a href="admin.html" class="sections-adm">
+      <span>Administração</span>
+    </a>
+  </div>
+  <p></p>
+  <p></p>
+  <p></p>
+  <div class="promo-container">
+    <img src="img/promo.png" alt="promo" class="promo-img">
+  </div>
+  <div id="login-popup" class="popup">
+    <form>
+      <button class="close-btn" onclick="closeLoginPopup()">X</button>
+      <h2 class="insess">Iniciar Sessão</h2>
+      <h3>Faça login ou crie uma conta para começar a comprar na Clothes.S e ter acesso a promoções exclusivas.</h3>
+      <label for="email">E-mail:</label>
+      <input type="email" id="email">
+      <label for="password">Palavra-passe:</label>
+      <input type="password" id="password">
+      <button type="submit">Iniciar sessão</button>
+      <button type="submit">Criar conta</button>
+      
+      <span>Iniciar sessão com:</span>
+      <div class="social-icons">
+        <a href="#">
+          <img src="img/gico.png" alt="Google" width="50" height="50">
+        </a>
+        <a href="#">
+          <img src="img/fbico.png" alt="Facebook" width="50" height="50">
+        </a>
+        <a href="#">
+          <img src="img/msico.png" alt="Microsoft" width="50" height="50">
+        </a>
+    </form>
+  </div>
 </body>
 
 </html>

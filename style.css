@@ -134,6 +134,10 @@ body {
   align-items: center;
 }
 
+
+
+
+
 #login-popup {
   display: none;
   position: fixed;
@@ -173,7 +177,7 @@ body {
   padding: 5px;
   margin-bottom: 10px;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid #691a03;
 }
 
 #login-popup button {
@@ -183,13 +187,13 @@ body {
   margin-top: 10px;
   border-radius: 5px;
   border: none;
-  background-color: #007bff;
-  color: #fff;
+  background-color: #ffffff;
+  color: #691a03;
   cursor: pointer;
 }
 
 #login-popup button:hover {
-  background-color: #0069d9;
+  background-color: #691a03;
 }
 
 #close-popup {
@@ -206,3 +210,4 @@ body {
   line-height: 1;
   cursor: pointer;
 }
+
