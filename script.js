@@ -1,8 +1,8 @@
 let loginButton = document.querySelector('.user-texts .user-text-ico:nth-child(1)'),
-    registerButton = document.querySelector('regis-btn'),
+    registerButton = document.querySelector('.regis-btn'),
     loginPopup = document.getElementById('login-popup'),
     closePopup = document.getElementById('close-popup'),
-    registerPopup = document.getElementById('regito-popup');
+    registerPopup = document.getElementById('registo-popup');
 
 function showLoginPopup() {
     let loginPopup = document.getElementById('login-popup');
@@ -19,4 +19,4 @@ function closeLoginPopup() {
 function showRegisterPopup() {
     let registerPopup = document.getElementById('registo-popup');
     registerPopup.style.display = 'block';
-  }
+}
