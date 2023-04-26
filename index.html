@@ -64,6 +64,8 @@
   <div class="promo-container">
     <img src="img/promo.png" alt="promo" class="promo-img">
   </div>
+
+  <!--Login popup-->
   <div id="login-popup" class="popup">
     <form>
       <button class="close-btn" onclick="closeLoginPopup()">X</button>
@@ -74,10 +76,9 @@
       <label for="password">Palavra-passe:</label>
       <input type="password" id="password">
       <button type="submit">Iniciar sessão</button>
-      <button type="submit">Criar conta</button>
-      
+      <button class="regis-btn" onclick="showRegisterPopup()"">Criar conta</button>
       <span>Iniciar sessão com:</span>
-      <div class="social-icons">
+      <div class=" social-icons">
         <a href="#">
           <img src="img/gico.png" alt="Google" width="50" height="50">
         </a>
@@ -87,10 +88,15 @@
         <a href="#">
           <img src="img/msico.png" alt="Microsoft" width="50" height="50">
         </a>
-    </form>
   </div>
-  <div id="regito-popup" class="popup">
+  </form>
+  </div>
+
+
+  <!--Registo popup-->
+  <div id="registo-popup" class="popup">
     <form>
+      <button class="close-btn" onclick="closeLoginPopup()">X</button>
       <h2 class="cricont">Criar Conta</h2>
       <h3>Crie uma conta para começar a comprar na Clothes.S e ter acesso a promoções exclusivas.</h3>
       <label for="regemail">E-mail:</label>
@@ -112,8 +118,9 @@
       <label for="city">Localidade</label>
       <input type="text" id="city">
       <button type="submit">Criar conta</button>
-  </form>
+    </form>
   </div>
+
 </body>
 
 </html>
