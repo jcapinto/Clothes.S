@@ -270,3 +270,7 @@ body {
 #registo-popup button:hover {
   background-color: #691a03;
 }
+
+.popup.active {
+  display: block;
+}
