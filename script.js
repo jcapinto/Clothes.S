@@ -1,10 +1,10 @@
 let loginButton = document.querySelector('.user-texts .user-text-ico:nth-child(1)'),
-    registerButton = document.querySelector('#regis-btn'),
+    registerButton = document.getElementById('regis-btn'),
     loginPopup = document.getElementById('login-popup'),
     closePopup = document.getElementById('close-popup'),
     registerPopup = document.getElementById('registo-popup');
 
-    registerButton.addEventListener('click', showRegisterPopup);
+registerButton.addEventListener('click', showRegisterPopup);
 
 function showRegisterPopup() {
     console.log('showRegisterPopup called');
