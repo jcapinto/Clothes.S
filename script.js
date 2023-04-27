@@ -7,8 +7,9 @@ let loginButton = document.querySelector('.user-texts .user-text-ico:nth-child(1
     registerButton.addEventListener('click', showRegisterPopup);
 
 function showRegisterPopup() {
-    let registerPopup = document.getElementById('registo-popup');
-    registerPopup.style.display = 'block';
+    console.log('showRegisterPopup called');
+    registerPopup.classList.add('active');
+    loginPopup.classList.remove('active');
 }
 
 function showLoginPopup() {
