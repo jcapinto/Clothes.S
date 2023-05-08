@@ -1,25 +1,23 @@
-let loginButton = document.getElementById('.log-button'),
+let loginButton = document.getElementById('log-button'),
     registerButton = document.getElementById('regis-btn'),
     loginPopup = document.getElementById('login-popup'),
-    closePopup = document.getElementById('close-popup'),
+    closeButton = document.getElementById('close-btn'),
     registerPopup = document.getElementById('registo-popup');
 
+
+loginButton.addEventListener('click', showLoginPopup);
+closeButton.addEventListener('click', closePopup);
 registerButton.addEventListener('click', showRegisterPopup);
 
-function showRegisterPopup() {
-    console.log('showRegisterPopup called');
-    registerPopup.classList.add('active');
-    loginPopup.classList.remove('active');
-}
-
 function showLoginPopup() {
-    let loginPopup = document.getElementById('login-popup');
     loginPopup.style.display = 'block';
 }
 
-function closeLoginPopup() {
-    let loginPopup = document.getElementById('login-popup'),
-        registerPopup = document.getElementById("registo-popup");
+function showRegisterPopup() {
+    registerButton.style.display = 'block';
+}
+
+function closePopup() {
     loginPopup.style.display = 'none';
     registerPopup.style.display = 'none';
 }

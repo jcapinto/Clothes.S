@@ -15,7 +15,7 @@
   <div class="top-bar">
     <p>Entrega GRÁTIS para compras superiores a 20€</p>
   </div>
-  <!--Menu e ícone de pesquisa-->
+  <!--Menu e icone de pesquisa-->
   <table class="top-menu">
     <tr>
       <td>
@@ -33,9 +33,9 @@
   </div>
   <!--Login, Favoritos e Saco de compras-->
   <div class="user-texts">
-    <a id="log-button" href="#">
+    <a id="log-button">
       <img src="img/logico.png" alt="Login" width="20" height="20">
-      <span class="user-text">Login</span>
+      <span id="log-button-text" class="user-text">Login</span>
     </a>
     <a class="user-text-ico">
       <img src="img/favico.png" alt="Favoritos" width="20" height="20">
@@ -68,7 +68,7 @@
   <!--Login popup-->
   <div id="login-popup" class="popup">
     <form>
-      <button class="close-btn" onclick="closeLoginPopup()">X</button>
+      <button id="close-btn">X</button>
       <h2 class="insess">Iniciar Sessão</h2>
       <h3>Faça login ou crie uma conta para começar a comprar na Clothes.S e ter acesso a promoções exclusivas.</h3>
       <label for="email">E-mail:</label>
@@ -96,7 +96,7 @@
   <!--Registo popup-->
   <div id="registo-popup" class="popup">
     <form>
-      <button class="close-btn" onclick="closeLoginPopup()">X</button>
+      <button id="close-btn">X</button>
       <h2 class="cricont">Criar Conta</h2>
       <h3>Crie uma conta para começar a comprar na Clothes.S e ter acesso a promoções exclusivas.</h3>
       <label for="regemail">E-mail:</label>
