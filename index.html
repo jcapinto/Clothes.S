@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-pt">
 
 <head>
   <meta charset="UTF-8">
@@ -33,92 +33,92 @@
   </div>
   <!--Login, Favoritos e Saco de compras-->
   <div class="user-texts">
-    <a id="log-button">
-      <img src="img/logico.png" alt="Login" width="20" height="20">
-      <span id="log-button-text" class="user-text">Login</span>
-    </a>
-    <a class="user-text-ico">
-      <img src="img/favico.png" alt="Favoritos" width="20" height="20">
-      <span class="user-text">Favoritos</span>
-    </a>
-    <a class="user-text-ico">
-      <img src="img/carico.png" alt="Saco de compras" width="20" height="20">
-      <span class="user-text">Saco de compras (0)</span>
-    </a>
+
+    <div id="log-button">
+      <img id="iconlfc" src="img/logico.png" alt="Login" width="20" height="20">
+      <span id="log-button-text">Login</span>
+    </div>
+
+    <div class="fav-button">
+      <img id="iconlfc" src="img/favico.png" alt="Favoritos" width="20" height="20">
+      <span class="fav-button-text">Favoritos</span>
+    </div>
+
+    <div class="cart-button">
+      <img id="iconlfc" src="img/carico.png" alt="Saco de compras" width="20" height="20">
+      <span class="cart-button-text">Saco de compras (0)</span>
+    </div>
+
   </div>
+
   <p></p>
   <div class="top-sections">
-    <a class="sections-w">
+    <div class="sections-w">
       <span>Mulheres</span>
-    </a>
-    <a class="sections-m">
+    </div>
+    <div class="sections-m">
       <span>Homens</span>
-    </a>
-    <a href="admin.html" class="sections-adm">
+    </div>
+    <div id="top-adm" class="sections-adm">
       <span>Administração</span>
-    </a>
+    </div>
   </div>
   <p></p>
   <p></p>
   <p></p>
+
+  <!--Login and Register-->
+  <div id="login-proce">
+    <div id="info">
+      <h1 id="h1reg">Iniciar Sessão</h1>
+      <h2 id="h2reg">Faça login ou crie uma conta para começar a comprar na Clothes.S e ter acesso a promoções
+        exclusivas.</h2>
+    </div>
+    <label for="email" class="login">E-mail:</label>
+    <input type="email" id="email" class="login">
+    <label for="password" class="login">Escolha uma palavra-passe:</label>
+    <input type="password" id="password" class="login">
+    <p class="registar">A senha deve ter pelo menos 6 caracteres, incluir uma letra maiúscula e um número.</p>
+    <label for="confpassword" class="registar">Confirme a palavra-passe:</label>
+    <input type="password" id="confpassword" class="registar">
+    <label for="name" class="registar">Nome completo</label>
+    <input type="text" id="name" class="registar">
+    <label for="date" class="registar">Data de nacimento</label>
+    <input type="date" id="date" class="registar">
+    <label for="nif" class="registar">NIF</label>
+    <input type="number" id="nif" class="registar">
+    <label for="address" class="registar">Morada</label>
+    <input type="text" id="address" class="registar">
+    <label for="postal" class="registar">Código Postal</label>
+    <input type="text" id="postal" class="registar">
+    <label for="city" class="registar">Localidade</label>
+    <input type="text" id="city" class="registar">
+    <label for="telemo" class="registar">Telemóvel</label>
+    <input type="number" id="telemo" class="registar">
+    <input type="button" value="Iniciar sessão" id="logproc-btn">
+    <input type="button" value="Criar conta" id="create-btn">
+    <span class="login">Iniciar sessão com:</span>
+    <div id="social-icons" class="login">
+      <a href="#">
+        <img src="img/gico.png" alt="Google" width="50" height="50">
+      </a>
+      <a href="#">
+        <img src="img/fbico.png" alt="Facebook" width="50" height="50">
+      </a>
+      <a href="#">
+        <img src="img/msico.png" alt="Microsoft" width="50" height="50">
+      </a>
+      <input type="button" value="Fechar" id="close-logbtn">
+    </div>
+  </div>
+<div id="user-area">
+</div>
+<div ip="store-products">
+</div>
+  <p id="output">
+  </p>
   <div class="promo-container">
     <img src="img/promo.png" alt="promo" class="promo-img">
-  </div>
-
-  <!--Login popup-->
-  <div id="login-popup" class="popup">
-    <form>
-      <button id="close-btn">X</button>
-      <h2 class="insess">Iniciar Sessão</h2>
-      <h3>Faça login ou crie uma conta para começar a comprar na Clothes.S e ter acesso a promoções exclusivas.</h3>
-      <label for="email">E-mail:</label>
-      <input type="email" id="email">
-      <label for="password">Palavra-passe:</label>
-      <input type="password" id="password">
-      <button type="submit">Iniciar sessão</button>
-      <button id="regis-btn">Criar conta</button>
-      <span>Iniciar sessão com:</span>
-      <div class=" social-icons">
-        <a href="#">
-          <img src="img/gico.png" alt="Google" width="50" height="50">
-        </a>
-        <a href="#">
-          <img src="img/fbico.png" alt="Facebook" width="50" height="50">
-        </a>
-        <a href="#">
-          <img src="img/msico.png" alt="Microsoft" width="50" height="50">
-        </a>
-  </div>
-  </form>
-  </div>
-
-
-  <!--Registo popup-->
-  <div id="registo-popup" class="popup">
-    <form>
-      <button id="close-btn">X</button>
-      <h2 class="cricont">Criar Conta</h2>
-      <h3>Crie uma conta para começar a comprar na Clothes.S e ter acesso a promoções exclusivas.</h3>
-      <label for="regemail">E-mail:</label>
-      <input type="regemail" id="regemail">
-      <label for="regpassword">Escolha uma palavra-passe:</label>
-      <input type="password" id="regpassword">
-      <label for="regpassword">Confirme a palavra-passe:</label>
-      <input type="password" id="regpassword">
-      <label for="date">Data de nacimento</label>
-      <input type="date" id="date">
-      <label for="name">Nome completo</label>
-      <input type="text" id="name">
-      <label for="nif">NIF</label>
-      <input type="number" id="nif">
-      <label for="address">Morada</label>
-      <input type="text" id="address">
-      <label for="postal">Código Postal</label>
-      <input type="text" id="postal">
-      <label for="city">Localidade</label>
-      <input type="text" id="city">
-      <button type="submit">Criar conta</button>
-    </form>
   </div>
 
 </body>

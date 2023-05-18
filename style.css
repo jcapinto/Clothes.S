@@ -48,27 +48,6 @@ body {
   margin: 0 auto;
 }
 
-/* Estilos para os user */
-.user-texts {
-  float: right;
-  margin-top: 10px;
-}
-
-/* Estilos para iso user */
-.user-text-ico {
-  display: inline-block;
-  margin-left: 10px;
-  text-align: center;
-}
-
-/* Estilos para o texto user */
-.user-text {
-  display: inline-block;
-  color:#691a03;
-  font-size: 12px;
-  margin-top: 5px;
-}
-
 /* Estilos para as secçoes */
 
 .top-sections {
@@ -77,16 +56,19 @@ body {
 }
 
 .sections-w {
+  display: inline-block;
   color:#691a03;
   margin-left: 20px;
 }
 
 .sections-m {
+  display: inline-block;
   color:#691a03;
   margin-left: 20px;
 }
 
 .sections-adm {
+  display: inline-block;
   color:#691a03;
   margin-left: 20px;
 }
@@ -106,20 +88,6 @@ body {
   margin: 0 auto;
 }
 
-
-
-
-
-
-.visuti-img-text {
-  vertical-align: top;
-  bottom: 0;
-  left: 0;
-  background-color: white;
-  padding: 10px;
-  font-size: 18px;
-}
-
 .adm-table {
   border: 1px solid black;
   border-collapse: collapse;
@@ -134,143 +102,121 @@ body {
   align-items: center;
 }
 
-
-
-
-
-#login-popup {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0,0,0,0.5);
-  z-index: 999;
+.user-texts {
+  float: right;
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
 }
 
-#login-popup form {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 5px;
+.user-texts #log-button-text,
+.fav-button-text,
+.cart-button-text {
+  display: inline-block;
+  color:#691a03;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.log-button {
+  margin-right: 20px; 
+}
+
+.fav-button {
+  margin-right: 20px; 
+  margin-left: 20px;
+}
+
+.cart-button {
+  margin-left: 20px; 
+}
+
+.iconlfc {
+  display: inline-block;
+  margin-left: 10px;
   text-align: center;
 }
 
-#login-popup h2 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-}
 
-#login-popup label {
-  display: block;
-  margin-bottom: 5px;
+#login-proce h1, #login-proce h2 {
   text-align: left;
 }
 
-#login-popup input {
+#login-proce label {
   display: block;
-  width: 100%;
-  padding: 5px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  border: 1px solid #691a03;
+  text-align: center;
 }
 
-#login-popup button {
+#login-proce input[type="email"],
+#login-proce input[type="password"],
+#login-proce input[type="confpassword"],
+#login-proce input[type="date"],
+#login-proce input[type="text"],
+#login-proce input[type="number"] {
   display: block;
-  width: 100%;
+  margin: 0 auto;
+}
+
+#login-proce button {
+  display: block;
+  margin: 20px auto 0;
+}
+
+#login-proce {
+  text-align: center;
+}
+
+#login-proce #logproc-btn,
+#login-proce #create-btn {
+  display: inline-block;
+  width: 200px;
   padding: 10px;
   margin-top: 10px;
   border-radius: 5px;
   border: none;
-  background-color: #ffffff;
-  color: #691a03;
-  cursor: pointer;
-}
-
-#login-popup button:hover {
   background-color: #691a03;
-}
-
-#close-popup {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  border: none;
-  background-color: #ccc;
-  color: #fff;
-  font-size: 1.2rem;
-  line-height: 1;
+  color: #ffffff;
   cursor: pointer;
 }
 
-
-
-#registo-popup {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0,0,0,0.5);
-  z-index: 999;
+#login-proce #logproc-btn:hover{
+  background-color: green;
 }
 
-#registo-popup form {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 5px;
+#login-proce #create-btn:hover {
+  background-color: rgb(255, 213, 0);
+}
+
+#login-proce span {
+  display: block;
+  margin: 20px auto 0;
   text-align: center;
 }
 
-#registo-popup h2 {
-  font-size: 1.5rem;
+#login-proce #social-icons {
+  text-align: center;
   margin-bottom: 10px;
 }
 
-#registo-popup label {
+#login-proce #close-logbtn {
   display: block;
-  margin-bottom: 5px;
-  text-align: left;
-}
-
-#registo-popup input {
-  display: block;
-  width: 100%;
-  padding: 5px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  border: 1px solid #691a03;
-}
-
-#registo-popup button {
-  display: block;
-  width: 100%;
+  margin: 20px auto 0;
+  width: 200px;
   padding: 10px;
   margin-top: 10px;
+  margin-bottom: 50px;
   border-radius: 5px;
   border: none;
-  background-color: #ffffff;
-  color: #691a03;
+  background-color: #691a03;
+  color: #ffffff;
   cursor: pointer;
 }
 
-#registo-popup button:hover {
-  background-color: #691a03;
+#login-proce #close-logbtn:hover {
+  background-color: red;
 }
 
-.popup.active {
-  display: block;
+#output {
+  text-align: center;
+  font-weight: bold;
 }
