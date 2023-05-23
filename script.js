@@ -1,15 +1,17 @@
-//Functions for Users
+// Functions for Users
+
+// User constructor function
 let User = function (email, password, name, date, nif, address, postal, city, telemo, isadmin) {
-    this.email = email;
-    this.password = password;
-    this.name = name;
-    this.date = date;
-    this.nif = nif;
-    this.address = address;
-    this.postal = postal;
-    this.city = city;
-    this.telemo = telemo;
-    this.isadmin = isadmin;
+    this.email = email; // User's email
+    this.password = password; // User's password
+    this.name = name; // User's name
+    this.date = date; // User's date of birth
+    this.nif = nif; // User's NIF (identification number)
+    this.address = address; // User's address
+    this.postal = postal; // User's postal code
+    this.city = city; // User's city
+    this.telemo = telemo; // User's telephone number
+    this.isadmin = isadmin; // Flag indicating if the user is an admin
 }
 
 User.prototype = {
@@ -114,7 +116,10 @@ let topButton = 0,
     currentCategoryIndex = 0,
     currentProductIndex = 0,
     adminAreaBtn = 0,
-    cartItemCount = 0;
+    cartItemCount = 0,
+    sidebarMenu = 0,
+    closeLMButton = 0,
+    leftMenuButton = 0;
 
 // user array
 let users = [];
@@ -123,11 +128,12 @@ let users = [];
 let userIndex = -1;
 
 function createAdminArea() {
-
     adminAreaBtn.innerHTML = '';
     storeProducts.innerHTML = '';
 
     closeLoginRegister();
+
+    openCloseAdmDiv();
 
     clearOutput();
 
@@ -399,6 +405,16 @@ function adminView() {
         }
     });
 
+}
+
+function openCloseAdmDiv() {
+    clearCatWM();
+
+    if (adminArea.style.display === 'block') {
+        adminArea.style.display = 'none';
+    } else {
+        adminArea.style.display = 'block';
+    }
 }
 
 function openCloseLoginDiv() {
@@ -865,9 +881,9 @@ let storeData = {
                     name: 'Casacos',
                     products: [
                         {
-                            nome: 'Casaco 1',
+                            nome: 'Casaco Longo',
                             preco: 100,
-                            imagem: 'casaco1.png',
+                            imagem: 'img/casaco1.png',
                             composicao: 'Algodão',
                             tamanho: 'M',
                             referencia: 'M001MP',
@@ -875,13 +891,13 @@ let storeData = {
                             stock: 10
                         },
                         {
-                            nome: 'Casaco 2',
+                            nome: 'Casaco Amarelo',
                             preco: 100,
-                            imagem: 'casaco2.png',
+                            imagem: 'img/casaco2.png',
                             composicao: 'Algodão',
                             tamanho: 'M',
-                            referencia: 'M002MP',
-                            cor: 'Preto',
+                            referencia: 'M002MAM',
+                            cor: 'Amarelo',
                             stock: 10
                         }
                     ]
@@ -890,13 +906,13 @@ let storeData = {
                     name: 'Camisolas',
                     products: [
                         {
-                            nome: 'Camisola 1',
+                            nome: 'Camisola Los Angeles',
                             preco: 50,
-                            imagem: 'Camisola1.png',
+                            imagem: 'img/camisola1.png',
                             composicao: 'Algodão',
                             tamanho: 'S',
-                            referencia: '002SB',
-                            cor: 'Branco',
+                            referencia: 'M003SB',
+                            cor: 'Branca',
                             stock: 50
                         }
                     ]
@@ -905,12 +921,12 @@ let storeData = {
                     name: 'T-shirts',
                     products: [
                         {
-                            nome: 'T-shirts 1',
+                            nome: 'T-shirt Preta',
                             preco: 10,
-                            imagem: 'tshirt1.png',
+                            imagem: 'img/tshirt1.png',
                             composicao: 'Algodão',
                             tamanho: 'S',
-                            referencia: '003SP',
+                            referencia: 'M004SP',
                             cor: 'Preto',
                             stock: 20
                         }
@@ -922,10 +938,10 @@ let storeData = {
                         {
                             nome: 'Calças de Ganga',
                             preco: 50,
-                            imagem: 'ganga1.png',
+                            imagem: 'img/ganga1.png',
                             composicao: 'Ganga',
                             tamanho: 'M',
-                            referencia: '004MAZ',
+                            referencia: 'M005MAZ',
                             cor: 'Azul',
                             stock: 5
                         }
@@ -940,13 +956,13 @@ let storeData = {
                     name: 'Casacos',
                     products: [
                         {
-                            nome: 'Casaco 1',
+                            nome: 'Casaco Rocky',
                             preco: 100,
-                            imagem: 'casaco1.png',
-                            composicao: 'Algodão',
+                            imagem: 'img/casacoh.png',
+                            composicao: 'Couro',
                             tamanho: 'M',
-                            referencia: '001MP',
-                            cor: 'Preto',
+                            referencia: 'H001MC',
+                            cor: 'Castanho',
                             stock: 10
                         }
                     ]
@@ -955,13 +971,13 @@ let storeData = {
                     name: 'Camisolas',
                     products: [
                         {
-                            nome: 'Camisola 1',
+                            nome: 'Camisola Regular Fit',
                             preco: 50,
-                            imagem: 'Camisola1.png',
+                            imagem: 'img/camisolah.png',
                             composicao: 'Algodão',
                             tamanho: 'S',
-                            referencia: '002SB',
-                            cor: 'Branco',
+                            referencia: 'H002SCZ',
+                            cor: 'Cinzenta',
                             stock: 50
                         }
                     ]
@@ -970,13 +986,13 @@ let storeData = {
                     name: 'T-shirts',
                     products: [
                         {
-                            nome: 'T-shirts 1',
+                            nome: 'T-shirt Polo',
                             preco: 10,
-                            imagem: 'tshirt1.png',
+                            imagem: 'img/tshirth.png',
                             composicao: 'Algodão',
                             tamanho: 'S',
-                            referencia: '003SP',
-                            cor: 'Preto',
+                            referencia: 'H003SAZ',
+                            cor: 'Azul',
                             stock: 20
                         }
                     ]
@@ -987,7 +1003,7 @@ let storeData = {
                         {
                             nome: 'Calças de Ganga',
                             preco: 50,
-                            imagem: 'ganga1.png',
+                            imagem: 'img/gangah.png',
                             composicao: 'Ganga',
                             tamanho: 'M',
                             referencia: '004MAZ',
@@ -1185,6 +1201,7 @@ function displayProduct() {
     let adminAreaImage = document.createElement('img');
     adminAreaImage.src = product.imagem;
     adminAreaImage.alt = product.nome;
+    adminAreaImage.style.width = '200px';
     adminArea.appendChild(adminAreaImage);
 
     let adminAreaPrice = document.createElement('p');
@@ -1673,44 +1690,81 @@ function createCartHTML() {
         </tbody>
       </table>
       <p>Total do carrinho: <span id="cart-total"></span></p>
-      <button id="checkout-button">Finalizar Encomenda</button>
+      <button class="finish-order-button" id="finish-order-button">Finalizar Compra</button>
     `;
+
+    // Adiciona a div "Dados do Utilizador"
+    cartHTML += `<div id="user-data-container"></div>`;
 
     cartContainer.innerHTML = cartHTML;
     hideShopBag();
 
-    // Adiciona evento ao botão "Finalizar Encomenda"
-    let checkoutButton = document.getElementById('checkout-button');
-    checkoutButton.addEventListener('click', function () {
-        processCheckout();
-    });
-}
-
-function processCheckout() {
-    // Verifica se o utilizador está logado
-    if (userIndex !== -1) {
-        // Utilizador logado
-        let user = users[userIndex];
-        let name = user.getName();
-        let email = user.getEmail();
-        let nif = user.getNif();
-        let address = user.getAddress();
-        let postal = user.getPostal();
-        let city = user.getCity();
-        let telemo = user.getTelemo();
-
-        // Realiza a validação dos dados
-        if (!name || !email || !nif || !address || !postal || !city || !telemo) {
-            output.innerHTML = "Por favor, preencha todos os campos obrigatórios.";
-            return;
+    // Adiciona um evento de clique ao botão "Finalizar Compra"
+    document.getElementById("finish-order-button").addEventListener("click", () => {
+        // Verifica se o usuário está com login feito
+        if (userIndex !== -1) {
+            // Preenche os campos automaticamente
+            document.getElementById("user-data-container").innerHTML = `
+              <h3>Dados do Utilizador</h3>
+              <p>Nome: ${users[userIndex].name}</p>
+              <p>Email: ${users[userIndex].email}</p>
+              <p>NIF: ${users[userIndex].nif}</p>
+              <p>Morada: ${users[userIndex].address}</p>
+              <p>Código Postal: ${users[userIndex].postalCode}</p>
+              <p>Cidade: ${users[userIndex].city}</p>
+              <p>Telemóvel: ${users[userIndex].phone}</p>
+              <button class="checkout-button" id="checkout-button">Avançar</button>
+            `;
+        } else {
+            // Solicita que o usuário preencha os campos manualmente
+            document.getElementById("user-data-container").innerHTML = `
+              <h3>Dados do Utilizador</h3>
+              <label for="name-input">Nome:</label><br> 
+              <input type="text" id="name-input" class="form-input" required><br> 
+              <label for="email-input">Email:</label><br> 
+              <input type="email" id="email-input" class="form-input" required><br> 
+              <label for="nif-input">NIF:</label><br> 
+              <input type="text" id="nif-input" class="form-input" required><br> 
+              <label for="address-input">Morada:</label><br> 
+              <input type="text" id="address-input" class="form-input" required><br> 
+              <label for="postal-input">Código Postal:</label><br> 
+              <input type="text" id="postal-input" class="form-input" required><br> 
+              <label for="city-input">Cidade:</label><br> 
+              <input type="text" id="city-input" class="form-input" required><br> 
+              <label for="telemo-input">Telemóvel:</label><br> 
+              <input type="text" id="telemo-input" class="form-input" required><br> 
+              <button class="checkout-button" id="checkout-button">Avançar</button>
+            `;
         }
 
-        // Dados do utilizador válidos, finaliza a encomenda
-        completeOrder(name, email, nif, address, postal, city, telemo);
-    } else {
-        // Utilizador não logado, permite preencher os dados
-        showCheckoutForm();
-    }
+        // Adiciona um evento de clique ao botão "Avançar"
+        document.getElementById("checkout-button").addEventListener("click", () => {
+            // Verifica se todos os campos estão preenchidos
+            let isValid = true;
+
+            if (userIndex === -1) {
+                // Se o usuário não estiver com login feito, verifica se todos os campos estão preenchidos
+                let inputs = document.querySelectorAll(".form-input");
+
+                inputs.forEach(input => {
+                    if (input.value.trim() === "") {
+                        isValid = false;
+                    }
+                });
+            }
+
+            if (isValid) {
+                // Se todos os campos estiverem preenchidos, esconde a div "Dados do Utilizador"
+                document.getElementById("user-data-container").style.display = "none";
+
+                // Chama a função showCheckoutForm
+                showCheckoutForm();
+            } else {
+                // Se algum campo estiver vazio, exibe uma mensagem de erro
+                alert("Por favor preencha todos os campos");
+            }
+        });
+    });
 }
 
 function showCheckoutForm() {
@@ -1719,131 +1773,86 @@ function showCheckoutForm() {
 
     // Cria os elementos do formulário de dados de envio
     let formHTML = `
-      <h3 class="form-title">Dados do Utilizador</h3>
-      <label for="name-input">Nome:</label>
-      <input type="text" id="name-input" class="form-input" required>
-      <label for="email-input">Email:</label>
-      <input type="email" id="email-input" class="form-input" required>
-      <label for="nif-input">NIF:</label>
-      <input type="text" id="nif-input" class="form-input" required>
-      <label for="address-input">Morada:</label>
-      <input type="text" id="address-input" class="form-input" required>
-      <label for="postal-input">Código Postal:</label>
-      <input type="text" id="postal-input" class="form-input" required>
-      <label for="city-input">Cidade:</label>
-      <input type="text" id="city-input" class="form-input" required>
-      <label for="telemo-input">Telemóvel:</label>
-      <input type="text" id="telemo-input" class="form-input" required>
-      <button id="confirm-shipping-button" class="form-button">Confirmar Dados de Envio</button>
+      <h3>Forma de Pagamento</h3>
+      <input type="radio" id="payment-cash" name="payment-method" value="cash">
+      <label for="payment-cash">Cobrança</label><br>
+      <input type="radio" id="payment-key" name="payment-method" value="key">
+      <label for="payment-key">Chave de pagamento</label><br>
+
+      <!-- Campo para inserir a chave de pagamento -->
+      <div id="payment-key-container"></div>
+
+      <!-- Botão para confirmar a forma de pagamento -->
+      <button class="checkout-button" id="confirm-payment-button">Confirmar Forma de Pagamento</button>
+
+      <!-- Mensagem de erro -->
+      <p id="error-message"></p>
+
+      <!-- Mensagem de sucesso -->
+      <p id="success-message"></p>
+
+      <!-- Botão para voltar para processLoggedIn -->
+      <button class="checkout-button" id="back-button">Voltar</button>
+
     `;
 
     // Renderiza o formulário de dados de envio
     output.innerHTML = formHTML;
 
-    // Adiciona evento ao botão "Confirmar Dados de Envio"
-    let confirmShippingButton = document.getElementById('confirm-shipping-button');
-    confirmShippingButton.addEventListener('click', function () {
-        showPaymentForm();
-    });
-}
-
-function showPaymentForm() {
-    // Limpa o output
-    clearOutput();
-
-    // Cria os elementos do formulário de escolha da forma de pagamento e chave de pagamento
-    let formHTML = `
-      <h3 class="form-title">Forma de Pagamento</h3>
-      <label for="payment-method">Escolha a forma de pagamento:</label>
-      <select id="payment-method" class="form-input">
-      <option value="chave">Cobrança</option>
-        <option value="chave">Chave de Pagamento</option>
-      </select>
-      <div id="payment-key-section" style="display: none;">
-        <label for="payment-key-input">Chave de Pagamento:</label>
-        <input type="text" id="payment-key-input" class="form-input" required>
-      </div>
-      <button id="confirm-payment-button" class="form-button">Confirmar Pagamento</button>
-    `;
-
-    // Renderiza o formulário de escolha da forma de pagamento
-    output.innerHTML = formHTML;
-
-    // Adiciona evento ao botão "Confirmar Pagamento"
-    let confirmPaymentButton = document.getElementById('confirm-payment-button');
-    confirmPaymentButton.addEventListener('click', function () {
-        validatePaymentForm();
+    // Adiciona um evento de mudança aos botões rádio
+    document.getElementsByName("payment-method").forEach(radio => {
+        radio.addEventListener("change", event => {
+            if (event.target.value === "key") {
+                // Mostra o campo para inserir a chave de pagamento
+                document.getElementById("payment-key-container").innerHTML = `
+                  <label for="payment-key-input">Chave:</label><br> 
+                  <input type="text" id="payment-key-input"><br>
+                `;
+            } else {
+                // Esconde o campo para inserir a chave de pagamento
+                document.getElementById("payment-key-container").innerHTML = "";
+            }
+        });
     });
 
-    // Adiciona evento ao select da forma de pagamento
-    let paymentMethodSelect = document.getElementById('payment-method');
-    paymentMethodSelect.addEventListener('change', function () {
-        togglePaymentKeySection();
+    // Adiciona um evento de clique ao botão "Confirmar Forma de Pagamento"
+    document.getElementById("confirm-payment-button").addEventListener("click", () => {
+        // Verifica qual forma de pagamento foi selecionada
+        let paymentMethodElement = document.querySelector('input[name="payment-method"]:checked');
+        if (paymentMethodElement) {
+            let paymentMethod = paymentMethodElement.value;
+            if (paymentMethod === "cash") {
+                // Se a forma de pagamento for Cobrança, não faz nada
+            } else if (paymentMethod === "key") {
+                // Se a forma de pagamento for Chave de pagamento, verifica se a chave é válida
+                let paymentKey = document.getElementById("payment-key-input").value;
+
+                if (isValidPaymentKey(paymentKey)) {
+                    // Se a chave for válida, exibe a mensagem "Encomenda efetuada com sucesso"
+                    document.getElementById("success-message").innerHTML = "Encomenda efetuada com sucesso";
+
+                    // Fecha o carrinho e volta para processIn
+                    setTimeout(() => {
+                        showShopBag();
+                        clearOutput();
+                        removeAll();
+                    }, 3000);
+                } else {
+                    // Se a chave não for válida, exibe uma mensagem de erro
+                    document.getElementById("error-message").innerHTML = "Chave de pagamento inválida";
+                }
+            } else {
+                // handle the case where no element was found
+                document.getElementById("error-message").innerHTML = "Por favor, selecione uma forma de pagamento";
+            }
+        }
     });
-}
 
-function togglePaymentKeySection() {
-    let paymentMethodSelect = document.getElementById('payment-method');
-    let paymentKeySection = document.getElementById('payment-key-section');
-    let selectedOption = paymentMethodSelect.value;
-
-    if (selectedOption === 'chave') {
-        paymentKeySection.style.display = 'block';
-    } else {
-        paymentKeySection.style.display = 'none';
-    }
-}
-
-function validatePaymentForm() {
-    let paymentMethodSelect = document.getElementById('payment-method');
-    let paymentKeyInput = document.getElementById('payment-key-input');
-    let paymentMethod = paymentMethodSelect.value;
-    let paymentKey = paymentKeyInput.value;
-
-    if (paymentMethod === 'chave' && isValidPaymentKey(paymentKey)) {
-        completeOrder(name, email, nif, address, postal, city, telemo);
-    } else {
-        output.innerHTML = "Chave de pagamento inválida. Encomenda não pode ser finalizada.";
-    }
-}
-
-function validateCheckoutForm() {
-    // Obtém os valores dos campos do formulário
-    let name = document.getElementById('name-input').value;
-    let email = document.getElementById('email-input').value;
-    let nif = document.getElementById('nif-input').value;
-    let address = document.getElementById('address-input').value;
-    let postal = document.getElementById('postal-input').value;
-    let city = document.getElementById('city-input').value;
-    let telemo = document.getElementById('telemo-input').value;
-
-    // Realiza a validação dos dados
-    if (!name || !email || !nif || !address || !postal || !city || !telemo) {
-        output.innerHTML = "Por favor, preencha todos os campos obrigatórios.";
-        return;
-    }
-
-    // Dados do utilizador válidos, finaliza a encomenda
-    completeOrder(name, email, nif, address, postal, city, telemo);
-}
-
-function completeOrder(name, email, nif, address, postal, city, telemo) {
-    // Limpa o output
-    clearOutput();
-
-    // Realiza o processamento necessário para finalizar a encomenda
-    // ...
-
-    // Obtém o valor da caixa de texto da chave de pagamento
-    const paymentKeyInput = document.getElementById('payment-key-input');
-    const paymentKey = paymentKeyInput.value;
-
-    // Verifica se a chave de pagamento é válida
-    if (isValidPaymentKey(paymentKey)) {
-        output.innerHTML = "Encomenda efetuada com sucesso.";
-    } else {
-        output.innerHTML = "Chave de pagamento inválida. Encomenda não pode ser finalizada.";
-    }
+    // Adiciona um evento de clique ao botão "Voltar"
+    document.getElementById("back-button").addEventListener("click", () => {
+        clearOutput();
+        showShopBag();
+    });
 }
 
 function isValidPaymentKey(paymentKey) {
@@ -2033,6 +2042,80 @@ function removeAll() {
 
 //End Cart
 
+// Função para fechar o menu lateral
+function openCloseleftMenu() {
+    clearCatWM();
+    adminArea.innerHTML = '';
+    adminAreaBtn.innerHTML = '';
+
+    if (sidebarMenu.style.display === 'block') {
+        sidebarMenu.style.display = 'none';
+    } else {
+        sidebarMenu.style.display = 'block';
+    }
+}
+
+function createLeftMenu() {
+    // Cria o elemento sidebar-menu
+    sidebarMenu = document.createElement('div');
+    sidebarMenu.id = 'sidebar-menu';
+
+    // Adiciona a classe 'sidebar-menu' para estilos CSS
+    sidebarMenu.classList.add('sidebar-menu');
+
+    // Cria o botão de fechar
+    closeLMButton = document.createElement('button');
+    closeLMButton.id = 'close-button';
+    closeLMButton.innerHTML = 'X';
+
+    // Adiciona a classe 'close-button' para estilos CSS
+    closeLMButton.classList.add('close-button');
+
+    // Adiciona o evento de clique ao botão de fechar
+    closeLMButton.addEventListener('click', openCloseleftMenu);
+
+    // Adiciona o botão de fechar ao menu lateral
+    sidebarMenu.appendChild(closeLMButton);
+
+    // Cria o elemento de espaçamento
+    let p3 = document.createElement('br');
+    sidebarMenu.appendChild(p3);
+    sidebarMenu.appendChild(p3.cloneNode());
+    sidebarMenu.appendChild(p3.cloneNode());
+
+    // Cria a label "Sobre"
+    let aboutLabel = document.createElement('label');
+    aboutLabel.innerHTML = 'Sobre: ';
+    
+    // Adiciona a classe 'about-label' para estilos CSS
+    aboutLabel.classList.add('about-label');
+
+    // Adiciona a label "Sobre" ao menu lateral
+    sidebarMenu.appendChild(aboutLabel);
+
+    sidebarMenu.appendChild(p3.cloneNode());
+    sidebarMenu.appendChild(p3.cloneNode());
+
+    // Cria uma nova label com texto vazio
+    let newLabel = document.createElement('label');
+    newLabel.innerHTML = 'Clothes.S desenvolvido por: João Pinto<br>';
+    newLabel.innerHTML += 'Momento de Avaliação 2<br>';
+    newLabel.innerHTML += 'Aluno Nº: 20221050<br>';
+    newLabel.innerHTML += 'Unidade Curricular: Desenvolvimento Web<br>';
+    newLabel.innerHTML += 'Professor: Paulo Neves<br>';
+    newLabel.innerHTML += 'Curso Técnico Superior Profissional em Tecnologias e Programação de Sistemas de Informação';
+
+    // Adiciona a classe 'info-label' para estilos CSS
+    newLabel.classList.add('info-label');
+
+    // Adiciona a nova label ao menu lateral
+    sidebarMenu.appendChild(newLabel);
+
+    // Adiciona o elemento ao corpo do documento
+    document.body.appendChild(sidebarMenu);
+}
+
+
 window.onload = function () {
     users.push(
         new User("admin@clothess.pt", "Aa12345", "Administrator João", "1991-09-22", "123456789",
@@ -2049,6 +2132,7 @@ window.onload = function () {
     adminButton = document.getElementById('top-adm');
     closeloginButton = document.getElementById('close-logbtn');
     bagButton = document.getElementById('shopBag');
+    leftMenuButton = document.getElementById('left-menu-btn');
 
     // Obtém os dados do utilizador dos campos de entrada
 
@@ -2067,7 +2151,6 @@ window.onload = function () {
     sectionsMen = document.getElementById('sections-m');
     catWomen = document.getElementById('cat-w');
     catMen = document.getElementById('cat-m');
-    catAdm = document.getElementById('cat-a');
     storeProducts = document.getElementById('store-products');
     cartContainer = document.getElementById('cart-container');
 
@@ -2078,15 +2161,20 @@ window.onload = function () {
     adminArea = document.getElementById('admin-area');
     adminAreaBtn = document.getElementById('admin-areabtn');
     searchBox = document.getElementById('sbox');
+    sidebarMenu = document.getElementById('sidebar-menu');
 
 
     // Oculta a div de login
     loginProce.style.display = 'none';
     adminButton.style.display = 'none';
+    createLeftMenu();
+    sidebarMenu.style.display = 'none';
 
     createCartHTML();
 
+
     topButton.addEventListener('click', openCloseLoginDiv);
+    leftMenuButton.addEventListener('click', openCloseleftMenu);
 
     closeloginButton.addEventListener('click', closeLoginRegister);
 
@@ -2101,8 +2189,6 @@ window.onload = function () {
 
     sectionsMen.addEventListener('mouseover', showMenCategory);
 
-
-
     // Array que contém todos os elementos que têm a classe "registar"
     elemetsNotNeededForLogin = document.getElementsByClassName("registar");
 
@@ -2115,4 +2201,3 @@ window.onload = function () {
     // Parágrafo do user h1
     info = document.getElementById("info");
 };
-
