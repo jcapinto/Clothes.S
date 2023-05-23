@@ -543,8 +543,7 @@ function userEdit() {
     // Update the information data
     infoData(2);
 
-    // Mostra os dados guardados atuais
-
+    // Show the current saved data
     nomeInput.value = users[userIndex].getName();
     dateInput.value = users[userIndex].getDate();
     addressInput.value = users[userIndex].getAddress();
@@ -552,27 +551,29 @@ function userEdit() {
     cityInput.value = users[userIndex].getCity();
     telemoInput.value = users[userIndex].getTelemo();
 
-    // Coloca o foco no primeiro elemento
+    // Set focus on the first input element
     nomeInput.focus();
 
-    // Altera os rótulos dos botões
+    // Modify the values of the buttons
     leftButton.value = "Efetuar alterações";
     rightButton.value = "Voltar";
 
-    // Remove os manipuladores de eventos atuais dos botões
+    // Remove the current event handlers from the buttons
     leftButton.removeEventListener("click", userEdit);
     rightButton.removeEventListener("click", logout);
 
-    // Adiciona novos manipuladores de eventos aos botões
+    // Add new event handlers to the buttons
     leftButton.addEventListener("click", changeUserData);
     rightButton.addEventListener("click", backToLoggedIn);
 }
 
+// Function to change user data based on the input values.
 function changeUserData() {
     console.log("changeUserData");
+    // Declare variables for storing input values
     let nome, date, address, postal, city, telemo;
 
-    // Atribui o valor do elemento as viaaveis
+    // Assign the values of the input elements to variables
     nome = nomeInput.value;
     date = dateInput.value;
     address = addressInput.value;
@@ -580,12 +581,14 @@ function changeUserData() {
     city = cityInput.value;
     telemo = telemoInput.value;
 
+    // Check if any of the required fields are empty
     if (nome.trim() === "" || date.trim() === "" || address.trim() === "" ||
         postal.trim() === "" || city.trim() === "" || telemo.trim() === "") {
         output.innerHTML = "Por favor preencha todos os campos";
         return;
     }
 
+    // Update the user data with the new values
     users[userIndex].setName(nome);
     users[userIndex].setDate(date);
     users[userIndex].setAddress(address);
@@ -599,10 +602,10 @@ function changeUserData() {
 //performs context change to login state
 function backToLoggedIn() {
     console.log("backToLoggedIn");
-    //hide elements corresponding to name
 
     clearOutput();
 
+    //hide elements corresponding to name
     registerElementsVisibility(false);
 
     //upadate info element
@@ -633,6 +636,7 @@ function processRegister() {
     //clear all input fields
     clearAllInput();
 
+    // place focus on email
     emailInput.focus();
 
     // change buttons captions - efetuar registo e voltar
@@ -650,6 +654,7 @@ function processRegister() {
     clearOutput();
 }
 
+//clears all input fields
 function clearAllInput() {
     nomeInput.value = "";
     emailInput.value = "";
@@ -663,10 +668,12 @@ function clearAllInput() {
     telemoInput.value = "";
 }
 
+//clear output paragraph tha is used to inform the user
 function clearOutput() {
     output.innerHTML = "";
 }
 
+//function that registers a new user when the button is pressed
 function userRegister() {
     console.log("userRegister");
 
@@ -675,7 +682,6 @@ function userRegister() {
     clearOutput();
 
     //optainn user data
-
     nome = nomeInput.value;
     email = emailInput.value;
     pass = passInput.value;
@@ -686,19 +692,19 @@ function userRegister() {
     city = cityInput.value;
     telemo = telemoInput.value;
 
-    // Verifica se todos os campos foram preenchidos
+    // Verifies if all fields are filled
     if (nome.trim() === "" || email.trim() === "" || pass.trim() === "" || date.trim() === "" || nif.trim() === "" || address.trim() === "" || postal.trim() === "" || city.trim() === "" || telemo.trim() === "") {
         output.innerHTML = "Por favor preencha todos os campos";
         return;
     }
 
-    // Verifica se o endereço de e-mail é válido
+    // Verifies if the email address is valid
     if (!verifyEmail(email)) {
         output.innerHTML = "Endereço de e-mail inválido";
         return;
     }
 
-    // Verifica se já existe um user com o mesmo endereço de e-mail
+    // Verifies if a user with the same email address already exists
     for (let i = 0; i < users.length; i++) {
         if (users[i].checkEmail(email)) {
             userExists = true;
@@ -715,17 +721,16 @@ function userRegister() {
         return;
     }
 
-    // Cria um novo objeto User com os dados do user e o adiciona ao array users
+    // Creates a new User object with the user data and adds it to the users array
     users.push(new User(email, pass, nome, date, nif, address, postal, city, telemo));
 
-    // Informa ao user que o registro foi bem-sucedido
+    // Informs the user that the registration was successful
     output.innerHTML = "Registro efetuado com sucesso";
 
     clearOutput();
 
-    // Limpa todos os campos de entrada
+    // Clears all input fields
     clearAllInput();
-
 }
 
 //function that enables the user to get back to login screen (after logout)
@@ -749,7 +754,7 @@ function backToLoginAfterLogout() {
     //place focus on email
     emailInput.focus();
 
-    //change buttons captions - Registar e Login
+    //change buttons captions - Iniciar Sessão e Criar conta
     leftButton.value = "Iniciar Sessão";
     rightButton.value = "Criar conta";
 
@@ -762,6 +767,8 @@ function backToLoginAfterLogout() {
     rightButton.addEventListener("click", processRegister);
 }
 
+//set visibility of register only elements
+//true (show) or false (hide), by default is hidden and the elements to show
 function registerElementsVisibility(state, elementsToShow) {
     let visibility = state ? "block" : "none";
     for (let i = 0; i < elemetsNotNeededForLogin.length; i++) {
@@ -788,7 +795,7 @@ function backToLogin() {
     //place focus on email
     emailInput.focus();
 
-    //change buttons captions - Registar e Login
+    //change buttons captions - Iniciar sessão e Criar conta
     leftButton.value = "Iniciar sessão";
     rightButton.value = "Criar conta";
 
@@ -801,6 +808,7 @@ function backToLogin() {
     rightButton.addEventListener("click", processRegister);
 }
 
+// Function to update information based on the state
 function infoData(state) {
     let logButtonText = document.getElementById('log-button-text');
     let h1reg = document.getElementById('h1reg');
@@ -826,6 +834,7 @@ function infoData(state) {
     }
 }
 
+// Function to handle logout functionality
 function logout() {
     console.log("logout");
     userIndex = -1;
@@ -871,6 +880,7 @@ function verifyEmail(email) {
     return validationResult;
 }
 
+// Function to verify if the password matches the confirmed password
 function verifyPassword() {
     let password = document.getElementById('password').value;
     let confirmPassword = document.getElementById('confpassword').value;
@@ -878,21 +888,26 @@ function verifyPassword() {
     return password === confirmPassword;
 }
 
+// Function to verify if the password meets certain requirements
 function verifyPasswordRequirements() {
     let password = document.getElementById('password').value;
     let hasUpperCase = /[A-Z]/.test(password);
     let hasNumber = /\d/.test(password);
-
+    // Regex (Define a search pattern in text) to Check if the password contains an uppercase letter
+    // Regex to Check if the password contains a digit
     return password.length >= 6 && hasUpperCase && hasNumber;
 }
 
+// Function to close the login/register form
 function closeLoginRegister() {
     console.log("closeLoginRegister");
     loginProce.style.display = 'none';
 }
-//End of Functions for Users
+/*End of Functions for Users*/
 
-//Functions for Store Content
+/*Functions for Store Content*/
+
+// Data structure organization for store data
 let storeData = {
     sections: [
         {
@@ -1038,14 +1053,15 @@ let storeData = {
     ]
 };
 
+//This function creates a form in the admin area of the page for adding a new product
 function adminAddProduct() {
-    let form, saveButton;
+    let form, saveButton, closeButton;
 
     adminArea.innerHTML = '';
 
     form = document.createElement('form');
 
-    // Cria campos para as informações do produto
+    // Create fields for product information
     let nameLabel = document.createElement('label');
     nameLabel.textContent = 'Nome: ';
     form.appendChild(nameLabel);
@@ -1110,11 +1126,12 @@ function adminAddProduct() {
     form.appendChild(stockInput);
     form.appendChild(document.createElement('br'));
 
-    // Cria campos para selecionar a seção e categoria
+    // Create fields for selecting section and category
     let sectionLabel = document.createElement('label');
     sectionLabel.textContent = 'Seção: ';
     form.appendChild(sectionLabel);
     let sectionSelect = document.createElement('select');
+    // Populate the section select dropdown with available sections from storeData
     for (let section of storeData.sections) {
         let option = document.createElement('option');
         option.value = section.name;
@@ -1137,7 +1154,7 @@ function adminAddProduct() {
     saveButton.addEventListener('click', function (event) {
         event.preventDefault();
 
-        // Obtém os valores inseridos no formulário
+        // Get the values entered in the form
         let name = nameInput.value;
         let preco = precoInput.value;
         let imagem = imagemInput.value;
@@ -1150,7 +1167,7 @@ function adminAddProduct() {
         let sectionName = sectionSelect.value;
         let categoryName = categoryInput.value;
 
-        // Cria um novo objeto de produto
+        // Create a new product object
         let newProduct = {
             nome: name,
             preco: preco,
@@ -1162,7 +1179,7 @@ function adminAddProduct() {
             stock: stock
         };
 
-        // Adiciona o novo produto à categoria selecionada
+        // Add the new product to the selected category
         for (let section of storeData.sections) {
             if (section.name === sectionName) {
                 let categoryFound = false;
@@ -1174,7 +1191,7 @@ function adminAddProduct() {
                     }
                 }
                 if (!categoryFound) {
-                    // Cria uma nova categoria se ela não existir
+                    // Create a new category if it doesn't exist
                     section.categories.push({
                         name: categoryName,
                         products: [newProduct]
@@ -1200,13 +1217,16 @@ function adminAddProduct() {
     adminArea.appendChild(form);
 }
 
+//The function retrieves the current section, category, and product from the storeData structure based 
 function displayProduct() {
-    adminArea.innerHTML = ''; // Limpa o conteúdo anterior
+    adminArea.innerHTML = '';
 
+    // Get the current section, category, and product based on the indices
     let section = storeData.sections[currentSectionIndex];
     let category = section.categories[currentCategoryIndex];
     let product = category.products[currentProductIndex];
 
+    // Create and append elements to display the product information
     let adminAreaTitle = document.createElement('h3');
     adminAreaTitle.textContent = `Seção: ${section.name}`;
     adminArea.appendChild(adminAreaTitle);
@@ -1246,6 +1266,7 @@ function displayProduct() {
     adminArea.appendChild(adminAreaColor);
 }
 
+//This function is responsible for advancing to the next product within the store's data structure
 function nextProduct() {
     let section = storeData.sections[currentSectionIndex];
     let category = section.categories[currentCategoryIndex];
@@ -1265,6 +1286,7 @@ function nextProduct() {
     }
 }
 
+//This function is responsible for moving to the previous product within the store's data structure
 function previousProduct() {
     let section = storeData.sections[currentSectionIndex];
     let category = section.categories[currentCategoryIndex];
@@ -1285,22 +1307,25 @@ function previousProduct() {
 
 }
 
+//this function provides a user interface to edit the product details
 function editProduct() {
-    let product = getCurrentProduct(); // Obtém o produto atualmente exibido na função displayProduct()
 
-    // Limpa o conteúdo da área de administração
+    // Get the currently displayed product from the getCurrentProduct function
+    let product = getCurrentProduct();
+
+    // Clear the content of the admin area
     adminArea.innerHTML = '';
     adminAreaBtn.innerHTML = '';
 
     let form = document.createElement('form');
 
-    // Cria campos para as informações do produto
+    // Create fields for the product information
     let nameLabel = document.createElement('label');
     nameLabel.textContent = 'Nome: ';
     form.appendChild(nameLabel);
     let nameInput = document.createElement('input');
     nameInput.type = 'text';
-    nameInput.value = product.nome; // Preenche o campo com o nome atual do produto
+    nameInput.value = product.nome;
     form.appendChild(nameInput);
     form.appendChild(document.createElement('br'));
 
@@ -1309,7 +1334,7 @@ function editProduct() {
     form.appendChild(precoLabel);
     let precoInput = document.createElement('input');
     precoInput.type = 'number';
-    precoInput.value = product.preco; // Preenche o campo com o preço atual do produto
+    precoInput.value = product.preco;
     form.appendChild(precoInput);
     form.appendChild(document.createElement('br'));
 
@@ -1318,7 +1343,7 @@ function editProduct() {
     form.appendChild(imagemLabel);
     let imagemInput = document.createElement('input');
     imagemInput.type = 'text';
-    imagemInput.value = product.imagem; // Preenche o campo com a imagem atual do produto
+    imagemInput.value = product.imagem;
     form.appendChild(imagemInput);
     form.appendChild(document.createElement('br'));
 
@@ -1327,7 +1352,7 @@ function editProduct() {
     form.appendChild(composicaoLabel);
     let composicaoInput = document.createElement('input');
     composicaoInput.type = 'text';
-    composicaoInput.value = product.composicao; // Preenche o campo com a composição atual do produto
+    composicaoInput.value = product.composicao;
     form.appendChild(composicaoInput);
     form.appendChild(document.createElement('br'));
 
@@ -1336,7 +1361,7 @@ function editProduct() {
     form.appendChild(tamanhoLabel);
     let tamanhoInput = document.createElement('input');
     tamanhoInput.type = 'text';
-    tamanhoInput.value = product.tamanho; // Preenche o campo com o tamanho atual do produto
+    tamanhoInput.value = product.tamanho;
     form.appendChild(tamanhoInput);
     form.appendChild(document.createElement('br'));
 
@@ -1345,7 +1370,7 @@ function editProduct() {
     form.appendChild(referenciaLabel);
     let referenciaInput = document.createElement('input');
     referenciaInput.type = 'text';
-    referenciaInput.value = product.referencia; // Preenche o campo com a referência atual do produto
+    referenciaInput.value = product.referencia;
     form.appendChild(referenciaInput);
     form.appendChild(document.createElement('br'));
 
@@ -1354,7 +1379,7 @@ function editProduct() {
     form.appendChild(corLabel);
     let corInput = document.createElement('input');
     corInput.type = 'text';
-    corInput.value = product.cor; // Preenche o campo com a cor atual do produto
+    corInput.value = product.cor;
     form.appendChild(corInput);
     form.appendChild(document.createElement('br'));
 
@@ -1363,17 +1388,17 @@ function editProduct() {
     form.appendChild(stockLabel);
     let stockInput = document.createElement('input');
     stockInput.type = 'number';
-    stockInput.value = product.stock; // Preenche o campo com o stock atual do produto
+    stockInput.value = product.stock;
     form.appendChild(stockInput);
     form.appendChild(document.createElement('br'));
 
-    // Crie o botão de salvamento
+    // Create the save button
     let saveButton = document.createElement('button');
     saveButton.textContent = 'Guardar';
     saveButton.addEventListener('click', function (event) {
         event.preventDefault();
 
-        // Atualize os valores do produto com base nos campos do formulário
+        // Update the product values based on the form fields
         product.nome = nameInput.value;
         product.preco = precoInput.value;
         product.imagem = imagemInput.value;
@@ -1382,35 +1407,36 @@ function editProduct() {
         product.referencia = referenciaInput.value;
         product.cor = corInput.value;
         product.stock = stockInput.value;
-        // Atualize os outros atributos do produto da mesma forma
+        // Update other product attributes in a similar manner
 
-        // Exiba uma mensagem indicando que o produto foi editado com sucesso
+        // Display a message indicating that the product has been successfully edited
         output.innerHTML = 'Produto editado com sucesso.';
     });
 
     let backButton = document.createElement('button');
     backButton.textContent = 'Voltar';
     backButton.addEventListener('click', function () {
-        adminEditProducts(); // Função para exibir a lista de produtos novamente
+        adminEditProducts(); // Function to display the list of products again
     });
 
     form.appendChild(backButton);
 
-    // Crie o botão de fechar
+    // Create the close button
     let closeButton = document.createElement('button');
     closeButton.textContent = 'Fechar';
     closeButton.addEventListener('click', function () {
         adminArea.innerHTML = '';
     });
 
-    // Adicione os campos do formulário e os botões à área de administração
+    // Add the form fields and buttons to the admin area
     form.appendChild(saveButton);
     form.appendChild(closeButton);
     adminArea.appendChild(form);
 }
 
+//this function prepares the admin area by displaying the product information and providing buttons for navigation
 function adminEditProducts() {
-    adminArea.innerHTML = ''; // Limpa o conteúdo anterior
+    adminArea.innerHTML = '';
     adminAreaBtn.innerHTML = '';
 
     clearOutput();
@@ -1437,10 +1463,9 @@ function adminEditProducts() {
     editButton.textContent = 'Editar';
     editButton.addEventListener('click', editProduct);
     adminAreaBtn.appendChild(editButton);
-
-
 }
 
+//this function can close the admin area, clear its content, and reset the indexes
 function closeAdminArea() {
     adminArea.innerHTML = '';
     currentSectionIndex = 0;
@@ -1448,6 +1473,7 @@ function closeAdminArea() {
     currentProductIndex = 0;
 }
 
+// Retrieve the currently displayed product
 function getCurrentProduct() {
     let currentSection = storeData.sections[currentSectionIndex];
     let currentCategory = currentSection.categories[currentCategoryIndex];
@@ -1456,11 +1482,17 @@ function getCurrentProduct() {
     return currentProduct;
 }
 
+// Retrieve the section name based on the given section and category names
 function getSectionName(sectionName, categoryName) {
+    // Iterate over the sections in the storeData object
     for (let section of storeData.sections) {
+        // Check if the section name matches the given sectionName
         if (section.name === sectionName) {
+            // Iterate over the categories in the current section
             for (let cat of section.categories) {
+                // Check if the category name matches the given categoryName
                 if (cat.name === categoryName) {
+                    // If both section and category names match, return the section name
                     return section.name;
                 }
             }
@@ -1468,12 +1500,17 @@ function getSectionName(sectionName, categoryName) {
     }
 }
 
+// Retrieve the products of a given section and category
 function getProducts(sectionName, categoryName) {
-    // Busca a seção e categoria correspondente
+    // Iterate over the sections in the storeData object
     for (let section of storeData.sections) {
+        // Check if the section name matches the given sectionName
         if (section.name === sectionName) {
+            // Iterate over the categories in the current section
             for (let cat of section.categories) {
+                // Check if the category name matches the given categoryName
                 if (cat.name === categoryName) {
+                    // If both section and category names match, return the products of the category
                     return cat.products;
                 }
             }
@@ -1481,30 +1518,40 @@ function getProducts(sectionName, categoryName) {
     }
 }
 
-// Função para obter o nome da categoria
+// Retrieve the name of a category
 function getCategoryName(category) {
+    // Iterate over the sections in the storeData object
     for (let section of storeData.sections) {
+        // Iterate over the categories in the current section
         for (let cat of section.categories) {
+            // Check if the name of the current category matches the given category name
             if (cat.name === category) {
+                // If a match is found, return the name of the category
                 return cat.name;
             }
         }
     }
 }
 
+//This function is responsible for displaying the women's categories in the store
 function showWomenCategory() {
+
+    // Declare variables for each category
     let casaco, camisola, tshirt, calca;
 
+    // Close the login/register area
     closeLoginRegister();
 
+    // Clear the store products area
     clearStoreProducts();
 
+    // Hide the shopping bag
     hideShopBag();
 
-    // Limpa os produtos anteriores
+    // Clear previous categories
     clearCatWM();
 
-    // Cria as categoria de mulheres
+    // Create the women's categories
     casaco = document.createElement('div');
     casaco.textContent = 'Casacos';
     catWomen.appendChild(casaco);
@@ -1526,19 +1573,25 @@ function showWomenCategory() {
     calca.addEventListener('click', () => showProducts('Mulheres', 'Calças'));
 }
 
+//This function is responsible for displaying the men's categories in the store
 function showMenCategory() {
+
+    // Declare variables for each category
     let casaco, camisola, tshirt, calca;
 
+    // Close the login/register area
     closeLoginRegister();
 
+    // Clear the store products area
     clearStoreProducts();
 
+    // Hide the shopping bag
     hideShopBag();
 
-    // Limpa os produtos anteriores
+    // Clear previous categories
     clearCatWM();
 
-    // Cria as categoria de homem
+    // Create the men's categories
     casaco = document.createElement('div');
     casaco.textContent = 'Casacos';
     catMen.appendChild(casaco);
@@ -1560,24 +1613,28 @@ function showMenCategory() {
     calca.addEventListener('click', () => showProducts('Homens', 'Calças'));
 }
 
+//This function is responsible for displaying the products of a specific section and category in the store
 function showProducts(sectionName, categoryName) {
+
     closeLoginRegister();
 
     clearCatWM();
-    // Limpa os produtos anteriores
+
+    // Clear the store products area
     clearStoreProducts();
 
+    // Hide the shopping bag
     hideShopBag();
 
-    // Obtém os produtos da categoria selecionada
+    // Get the products of the selected category
     let products = getProducts(sectionName, categoryName), cartbutton;
 
-    // Cria um elemento para exibir o nome da seção e da categoria
+    // Create an element to display the section and category names
     let sectionElement = document.createElement('h3');
     sectionElement.textContent = `${sectionName}/${categoryName}`;
     storeProducts.appendChild(sectionElement);
 
-    // Cria elementos para os produtos e adiciona ao elemento store-products
+    // Create elements for each product and add them to the store-products element
     for (let product of products) {
         let productElement = document.createElement('div');
         productElement.innerHTML = `
@@ -1614,15 +1671,17 @@ function showProducts(sectionName, categoryName) {
     }
 }
 
+//This function searches for products in all sections and categories that match a given query
 function getMatchingProducts(query) {
     let products = [];
 
-    // Busca os produtos em todas as seções e categorias
+    // Search for products in all sections and categories
     for (let section of storeData.sections) {
         for (let category of section.categories) {
             for (let product of category.products) {
-                // Verifica se o nome do produto contém o termo de pesquisa
+                // Check if the product name contains the search term (case-insensitive)
                 if (product.nome.toLowerCase().includes(query.toLowerCase())) {
+                    // Add the matching product, section name, and category name to the products array
                     products.push({
                         product: product,
                         sectionName: section.name,
@@ -1636,18 +1695,19 @@ function getMatchingProducts(query) {
     return products;
 }
 
+//this function performs a search for products based on a given query and displays the search results.
 function searchProducts(query) {
     closeLoginRegister();
 
-    // Limpa os produtos anteriores
+    // Clear previous products
     clearStoreProducts();
 
     hideShopBag();
 
-    // Busca os produtos que correspondem ao termo de pesquisa
+    // Search for products that match the search query
     let products = getMatchingProducts(query), cartbutton;
 
-    // Cria elementos para os produtos e adiciona ao elemento store-products
+    // Create elements for the products and add them to the store-products element
     for (let item of products) {
         let product = item.product;
         let sectionName = item.sectionName;
@@ -1676,25 +1736,31 @@ function searchProducts(query) {
     }
 }
 
+//This function clears the contents of the storeProducts element.
 function clearStoreProducts() {
     storeProducts.innerHTML = '';
 }
 
+//The function clears the contents of the catWomen and catMen elements. 
 function clearCatWM() {
     catWomen.innerHTML = '';
     catMen.innerHTML = '';
 }
-//End of Functions for Store Content
+/* End of Functions for Store Content */
 
-//cart
+/*Functions for Cart Content*/
+
+//array for cart content
 let cart = [];
 
+//this function sets the CSS display property of the cartContainer element to 'none'
 function hideShopBag() {
     cartContainer.style.display = 'none';
 }
 
+//This function is responsible for generating the HTML structure for the shopping cart or shop bag
 function createCartHTML() {
-    // Cria a estrutura HTML do carrinho de compras
+    // Create the HTML structure of the shopping cart
     let cartHTML = `
       <h2>Saco de compras</h2>
       <table>
@@ -1714,17 +1780,17 @@ function createCartHTML() {
       <button class="finish-order-button" id="finish-order-button">Finalizar Compra</button>
     `;
 
-    // Adiciona a div "Dados do Utilizador"
+    // Add the "User Data" div
     cartHTML += `<div id="user-data-container"></div>`;
 
     cartContainer.innerHTML = cartHTML;
     hideShopBag();
 
-    // Adiciona um evento de clique ao botão "Finalizar Compra"
+    // Add a click event to the "Finish Order" button
     document.getElementById("finish-order-button").addEventListener("click", () => {
-        // Verifica se o usuário está com login feito
+        // Check if the user is logged in
         if (userIndex !== -1) {
-            // Preenche os campos automaticamente
+            // Fill in the fields automatically
             document.getElementById("user-data-container").innerHTML = `
               <h3>Dados do Utilizador</h3>
               <p>Nome: ${users[userIndex].name}</p>
@@ -1737,7 +1803,7 @@ function createCartHTML() {
               <button class="checkout-button" id="checkout-button">Avançar</button>
             `;
         } else {
-            // Solicita que o usuário preencha os campos manualmente
+            // Request the user to fill in the fields manually
             document.getElementById("user-data-container").innerHTML = `
               <h3>Dados do Utilizador</h3>
               <label for="name-input">Nome:</label><br> 
@@ -1758,13 +1824,13 @@ function createCartHTML() {
             `;
         }
 
-        // Adiciona um evento de clique ao botão "Avançar"
+        // Add a click event to the "Avançar" button
         document.getElementById("checkout-button").addEventListener("click", () => {
-            // Verifica se todos os campos estão preenchidos
+            // Check if all fields are filled
             let isValid = true;
 
             if (userIndex === -1) {
-                // Se o usuário não estiver com login feito, verifica se todos os campos estão preenchidos
+                // If the user is not logged in, check if all fields are filled
                 let inputs = document.querySelectorAll(".form-input");
 
                 inputs.forEach(input => {
@@ -1775,24 +1841,25 @@ function createCartHTML() {
             }
 
             if (isValid) {
-                // Se todos os campos estiverem preenchidos, esconde a div "Dados do Utilizador"
+                // If all fields are filled, hide the "User Data" div
                 document.getElementById("user-data-container").style.display = "none";
 
-                // Chama a função showCheckoutForm
+                // Call the function showCheckoutForm
                 showCheckoutForm();
             } else {
-                // Se algum campo estiver vazio, exibe uma mensagem de erro
+                // If any field is empty, display an error message
                 alert("Por favor preencha todos os campos");
             }
         });
     });
 }
 
+// Display the checkout form for selecting the payment method
 function showCheckoutForm() {
-    // Limpa o output
+    // clean the output
     clearOutput();
 
-    // Cria os elementos do formulário de dados de envio
+    // Create the shipping information form elements
     let formHTML = `
       <h3>Forma de Pagamento</h3>
       <input type="radio" id="payment-cash" name="payment-method" value="cash">
@@ -1800,66 +1867,66 @@ function showCheckoutForm() {
       <input type="radio" id="payment-key" name="payment-method" value="key">
       <label for="payment-key">Chave de pagamento</label><br>
 
-      <!-- Campo para inserir a chave de pagamento -->
+      <!-- Field to enter the payment key -->
       <div id="payment-key-container"></div>
 
-      <!-- Botão para confirmar a forma de pagamento -->
+      <!-- Button to confirm the payment method -->
       <button class="checkout-button" id="confirm-payment-button">Confirmar Forma de Pagamento</button>
 
-      <!-- Mensagem de erro -->
+      <!-- Error message -->
       <p id="error-message"></p>
 
-      <!-- Mensagem de sucesso -->
+      <!-- Success message -->
       <p id="success-message"></p>
 
-      <!-- Botão para voltar para processLoggedIn -->
+      <!-- Button to go back -->
       <button class="checkout-button" id="back-button">Voltar</button>
 
     `;
 
-    // Renderiza o formulário de dados de envio
+    // Render the shipping information form
     output.innerHTML = formHTML;
 
-    // Adiciona um evento de mudança aos botões rádio
+    // Add change event listener to radio buttons
     document.getElementsByName("payment-method").forEach(radio => {
         radio.addEventListener("change", event => {
             if (event.target.value === "key") {
-                // Mostra o campo para inserir a chave de pagamento
+                // Show the field to enter the payment key
                 document.getElementById("payment-key-container").innerHTML = `
                   <label for="payment-key-input">Chave:</label><br> 
                   <input type="text" id="payment-key-input"><br>
                 `;
             } else {
-                // Esconde o campo para inserir a chave de pagamento
+                // Hide the field to enter the payment key
                 document.getElementById("payment-key-container").innerHTML = "";
             }
         });
     });
 
-    // Adiciona um evento de clique ao botão "Confirmar Forma de Pagamento"
+    // Add click event listener to "Confirm Payment Method" button
     document.getElementById("confirm-payment-button").addEventListener("click", () => {
-        // Verifica qual forma de pagamento foi selecionada
+        // Check which payment method is selected
         let paymentMethodElement = document.querySelector('input[name="payment-method"]:checked');
         if (paymentMethodElement) {
             let paymentMethod = paymentMethodElement.value;
             if (paymentMethod === "cash") {
-                // Se a forma de pagamento for Cobrança, não faz nada
+                // If payment method is Cash on Delivery, do nothing
             } else if (paymentMethod === "key") {
-                // Se a forma de pagamento for Chave de pagamento, verifica se a chave é válida
+                // If payment method is Payment Key, check if the key is valid
                 let paymentKey = document.getElementById("payment-key-input").value;
 
                 if (isValidPaymentKey(paymentKey)) {
-                    // Se a chave for válida, exibe a mensagem "Encomenda efetuada com sucesso"
+                    // If the key is valid, display the "Order placed successfully" message
                     document.getElementById("success-message").innerHTML = "Encomenda efetuada com sucesso";
 
-                    // Fecha o carrinho e volta para processIn
+                    // Close the cart and go back
                     setTimeout(() => {
                         showShopBag();
                         clearOutput();
                         removeAll();
                     }, 3000);
                 } else {
-                    // Se a chave não for válida, exibe uma mensagem de erro
+                    // If the key is invalid, display an error message
                     document.getElementById("error-message").innerHTML = "Chave de pagamento inválida";
                 }
             } else {
@@ -1869,27 +1936,29 @@ function showCheckoutForm() {
         }
     });
 
-    // Adiciona um evento de clique ao botão "Voltar"
+    // Add click event listener to "Voltar" button
     document.getElementById("back-button").addEventListener("click", () => {
         clearOutput();
         showShopBag();
     });
 }
 
+// This is a simple function that simulates a payment method and validates
 function isValidPaymentKey(paymentKey) {
-    // Defina a lista de chaves de pagamento aceitas
-    const acceptedKeys = ["865sh78f6hny89u9", "3fg1m43n134jhw"];
+    // Define the list of accepted payment keys
+    let acceptedKeys = ["865sh78f6hny89u9", "3fg1m43n134jhw"];
 
-    // Verifique se a chave de pagamento está na lista de chaves aceitas
+    // Check if the payment key is in the list of accepted keys
     return acceptedKeys.includes(paymentKey);
 }
 
+// This function updates the cart display on the page by populating the cart items table, calculating the cart total
 function updateCart() {
-    // Limpa os itens do carrinho anteriores
+    // Clear previous cart items
     let cartItemsElement = document.getElementById('cart-items');
     cartItemsElement.innerHTML = '';
 
-    // Adiciona os itens do carrinho à tabela
+    // Add cart items to the table
     let cartTotal = 0;
     for (let item of cart) {
         let productTotal = item.product.preco * item.quantity;
@@ -1909,7 +1978,7 @@ function updateCart() {
         `;
         cartItemsElement.appendChild(itemElement);
 
-        // Adiciona eventos aos botões
+        // Add event listeners to buttons
         let decreaseQuantityButton = itemElement.querySelector('.decrease-quantity');
         decreaseQuantityButton.addEventListener('click', function () {
             decreaseQuantity(item.product.referencia);
@@ -1926,64 +1995,67 @@ function updateCart() {
 
     }
 
-    // Adiciona o botão Limpar carrinho
+    // Add the Clear Cart button
     let clearCartButton = document.createElement('button');
     clearCartButton.textContent = 'Limpar carrinho';
-    clearCartButton.id = 'clear-cart-button'; // Adiciona um ID ao botão
+    clearCartButton.id = 'clear-cart-button';
     cartItemsElement.appendChild(clearCartButton);
     clearCartButton.addEventListener('click', function () {
         removeAll();
     });
 
-    // Atualiza o total do carrinho
+    // Update the cart total
     let cartTotalElement = document.getElementById('cart-total');
     cartTotalElement.textContent = `${cartTotal}€`;
 
-    // Atualiza a contagem de itens no carrinho
+    // Update the cart item count
     updateCartCount();
 }
 
+// This function adds a product to the cart. It checks if the product is in stock
 function addToCart(product) {
-    // Verifica se há estoque disponível
+    // Check if there is available stock
     if (product.stock <= 0) {
         clearOutput();
         output.innerHTML = 'Desculpe, este produto está esgotado.';
         return;
     }
 
-    // Adiciona o produto ao carrinho
+    // Add the product to the cart
     let existingProduct = cart.find(item => item.product.referencia === product.referencia);
     if (existingProduct) {
-        // Se o produto já estiver no carrinho, aumenta a quantidade
+        // If the product is already in the cart, increase the quantity
         existingProduct.quantity++;
     } else {
-        // Se o produto não estiver no carrinho, adiciona-o com quantidade 1
+        // If the product is not in the cart, add it with quantity 1
         cart.push({ product: product, quantity: 1 });
     }
 
-    // Atualiza o stok do produto
+    // Update the product stock
     updateStock(product.referencia, -1);
 
-    // Atualiza o carrinho de compras
+    // Update the cart display
     updateCart();
 
     cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
 
-    // Atualiza a contagem de itens no carrinho
+    // Update the cart item count
     updateCartCount();
 }
 
+// This function updates the cart item count displayed on the cart button.
 function updateCartCount() {
-    // Calcula o número de itens no carrinho
+    // Calculate the number of items in the cart
     let cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
 
-    // Atualiza a contagem de itens no carrinho
+    // Update the cart item count
     let cartCountElement = document.querySelector('.cart-button-text');
     cartCountElement.textContent = `Saco de compras (${cartItemCount})`;
 }
 
+// This function updates the stock of a product with the given reference
 function updateStock(referencia, change) {
-    // Atualiza o estoque do produto com a referência fornecida
+    // Update the stock of the product with the provided reference
     for (let section of storeData.sections) {
         for (let category of section.categories) {
             for (let product of category.products) {
@@ -1995,6 +2067,7 @@ function updateStock(referencia, change) {
     }
 }
 
+// This function displays the shopping bag.
 function showShopBag() {
     clearOutput();
     clearCatWM();
@@ -2002,68 +2075,74 @@ function showShopBag() {
     closeLoginRegister();
 
     if (cartContainer.style.display === 'none') {
-        // Se o carrinho de compras estiver oculto, mostra-o
+        // If the shopping bag is hidden, display it
         cartContainer.style.display = 'block';
     } else {
-        // Se o carrinho de compras estiver visível, oculta-o
+        // If the shopping bag is visible, hide it
         cartContainer.style.display = 'none';
     }
 }
 
+// This function increases the quantity of a product in the cart.
 function increaseQuantity(referencia) {
-    // Encontra o produto no carrinho e aumenta a quantidade
+    // Find the product in the cart and increase the quantity
     let existingProduct = cart.find(item => item.product.referencia === referencia);
     if (existingProduct) {
         existingProduct.quantity++;
     }
 
-    // Atualiza o carrinho de compras
+    // Update the shopping cart
     updateCart();
 
-    // Atualiza a contagem de itens no carrinho
+    // Update the item count in the shopping cart
     updateCartCount();
 }
 
+// This function decreases the quantity of a product in the cart.
 function decreaseQuantity(referencia) {
-    // Encontra o produto no carrinho e diminui a quantidade
+    // Find the product in the cart and decrease the quantity
     let existingProduct = cart.find(item => item.product.referencia === referencia);
     if (existingProduct) {
         existingProduct.quantity--;
         if (existingProduct.quantity === 0) {
-            // Se a quantidade chegar a 0, remove o produto do carrinho
+            // If the quantity reaches 0, remove the product from the cart
             cart = cart.filter(item => item.product.referencia !== referencia);
         }
     }
 
-    // Atualiza o carrinho de compras
+    // Update the shopping cart
     updateCart();
 
-    // Atualiza a contagem de itens no carrinho
+    // Update the item count in the shopping cart
     updateCartCount();
 }
 
+// This function removes a product from the cart.
 function removeFromCart(referencia) {
-    // Remove o produto do carrinho
+    // Remove the product from the cart
     cart = cart.filter(item => item.product.referencia !== referencia);
 
-    // Atualiza o carrinho de compras
+    // Update the shopping cart
     updateCart();
 
-    // Atualiza a contagem de itens no carrinho
+    // Update the item count in the shopping cart
     updateCartCount();
 }
 
+// This function removes all products from the cart.
 function removeAll() {
-    // Remove todos os produtos do carrinho
+    // Remove all products from the cart
     cart = [];
 
-    // Atualiza o carrinho de compras
+    // Update the shopping cart
     updateCart();
 }
 
-//End Cart
+/* End of Cart Function*/
 
-// Função para fechar o menu lateral
+/* Functions for the Left Menu */
+
+// This function opens or closes the left menu
 function openCloseleftMenu() {
     clearCatWM();
     adminArea.innerHTML = '';
@@ -2076,48 +2155,49 @@ function openCloseleftMenu() {
     }
 }
 
+// This function creates the left menu.
 function createLeftMenu() {
-    // Cria o elemento sidebar-menu
+    // Create the sidebar-menu element
     sidebarMenu = document.createElement('div');
     sidebarMenu.id = 'sidebar-menu';
 
-    // Adiciona a classe 'sidebar-menu' para estilos CSS
+    // Add the 'sidebar-menu' class for CSS styling
     sidebarMenu.classList.add('sidebar-menu');
 
-    // Cria o botão de fechar
+    // Create the close button
     closeLMButton = document.createElement('button');
     closeLMButton.id = 'close-button';
     closeLMButton.innerHTML = 'X';
 
-    // Adiciona a classe 'close-button' para estilos CSS
+    // Add the 'close-button' class for CSS styling
     closeLMButton.classList.add('close-button');
 
-    // Adiciona o evento de clique ao botão de fechar
+    // Add click event to the close button
     closeLMButton.addEventListener('click', openCloseleftMenu);
 
-    // Adiciona o botão de fechar ao menu lateral
+    // Append the close button to the sidebar menu
     sidebarMenu.appendChild(closeLMButton);
 
-    // Cria o elemento de espaçamento
+    // Create spacing element
     let p3 = document.createElement('br');
     sidebarMenu.appendChild(p3);
     sidebarMenu.appendChild(p3.cloneNode());
     sidebarMenu.appendChild(p3.cloneNode());
 
-    // Cria a label "Sobre"
+    // Create the "Sobre" label
     let aboutLabel = document.createElement('label');
     aboutLabel.innerHTML = 'Sobre: ';
 
-    // Adiciona a classe 'about-label' para estilos CSS
+    // Add the 'about-label' class for CSS styling
     aboutLabel.classList.add('about-label');
 
-    // Adiciona a label "Sobre" ao menu lateral
+    // Append the "Sobre" label to the sidebar menu
     sidebarMenu.appendChild(aboutLabel);
 
     sidebarMenu.appendChild(p3.cloneNode());
     sidebarMenu.appendChild(p3.cloneNode());
 
-    // Cria uma nova label com texto vazio
+    // Create a new label with text
     let newLabel = document.createElement('label');
     newLabel.innerHTML = 'Clothes.S desenvolvido por: João Pinto<br>';
     newLabel.innerHTML += 'Momento de Avaliação 2<br>';
@@ -2126,27 +2206,28 @@ function createLeftMenu() {
     newLabel.innerHTML += 'Professor: Paulo Neves<br>';
     newLabel.innerHTML += 'Curso Técnico Superior Profissional em Tecnologias e Programação de Sistemas de Informação';
 
-    // Adiciona a classe 'info-label' para estilos CSS
+    // Add the 'info-label' class for CSS styling
     newLabel.classList.add('info-label');
 
-    // Adiciona a nova label ao menu lateral
+    // Append the new label to the sidebar menu
     sidebarMenu.appendChild(newLabel);
 
-    // Adiciona o elemento ao corpo do documento
+    // Append the element to the document body
     document.body.appendChild(sidebarMenu);
 }
 
-
 window.onload = function () {
+
+    // admin and user data to the users array
     users.push(
         new User("admin@clothess.pt", "Aa12345", "Administrator João", "1991-09-22", "123456789",
             "Rua Principal", "6200-001", "Covilhã", 912345678, true));
-
+    // regular and user data to the users array
     users.push(
         new User("ana@ipcb.pt", "Bb12345", "Ana Pinto", "2003-12-07", "987654321",
             "Rua das Flores", "1234-567", "Porto", 987654321, false));
 
-    // Obtém os IDs dos botões
+    // Get button IDs
     topButton = document.getElementById('log-button');
     leftButton = document.getElementById('logproc-btn');
     rightButton = document.getElementById('create-btn');
@@ -2155,8 +2236,7 @@ window.onload = function () {
     bagButton = document.getElementById('shopBag');
     leftMenuButton = document.getElementById('left-menu-btn');
 
-    // Obtém os dados do utilizador dos campos de entrada
-
+    // Get user data from input fields
     emailInput = document.getElementById('email');
     passInput = document.getElementById('password');
     nomeInput = document.getElementById('name');
@@ -2167,6 +2247,7 @@ window.onload = function () {
     cityInput = document.getElementById('city');
     telemoInput = document.getElementById('telemo');
 
+    // Get references of HTML elements by their IDs
     loginProce = document.getElementById('login-proce');
     sectionsWomen = document.getElementById('sections-w');
     sectionsMen = document.getElementById('sections-m');
@@ -2174,51 +2255,49 @@ window.onload = function () {
     catMen = document.getElementById('cat-m');
     storeProducts = document.getElementById('store-products');
     cartContainer = document.getElementById('cart-container');
-
     h1reg = document.getElementById('h1reg');
     h2reg = document.getElementById('h2reg');
-    emailInput = document.getElementById('email');
-    passInput = document.getElementById('password');
     adminArea = document.getElementById('admin-area');
     adminAreaBtn = document.getElementById('admin-areabtn');
     searchBox = document.getElementById('sbox');
     sidebarMenu = document.getElementById('sidebar-menu');
 
-
-    // Oculta a div de login
+    // Hide the login div
     loginProce.style.display = 'none';
+    // Hide the admin button
     adminButton.style.display = 'none';
+    // window.onload call this function to create Left Menu
     createLeftMenu();
+    // Hide Left Menu after create
     sidebarMenu.style.display = 'none';
-
+    // window.onload call this function to create de Store Cart
     createCartHTML();
 
-
+    // Adding event listeners to buttons
     topButton.addEventListener('click', openCloseLoginDiv);
     leftMenuButton.addEventListener('click', openCloseleftMenu);
-
     closeloginButton.addEventListener('click', closeLoginRegister);
-
     leftButton.addEventListener('click', processLogin);
     rightButton.addEventListener('click', processRegister);
     adminButton.addEventListener('click', createAdminArea);
     bagButton.addEventListener('click', showShopBag);
 
+    // Adding event listener to Search Box
     searchBox.addEventListener('input', () => searchProducts(searchBox.value));
 
+    // Adding event listener to mouseover for the sections to show the category
     sectionsWomen.addEventListener('mouseover', showWomenCategory);
-
     sectionsMen.addEventListener('mouseover', showMenCategory);
 
-    // Array que contém todos os elementos que têm a classe "registar"
+    // Array containing all elements with the class "registar"
     elemetsNotNeededForLogin = document.getElementsByClassName("registar");
 
-    // Array que contém todos os elementos necessários para o login
+    // Array containing all elements needed for login
     elemetsNeededForLogin = document.getElementsByClassName("login");
 
-    // Parágrafo do user para saída
+    // User output paragraph
     output = document.getElementById("output");
 
-    // Parágrafo do user h1
+    // User h1 paragraph
     info = document.getElementById("info");
 };
