@@ -1,109 +1,90 @@
-// Functions for Users
-
+//Functions for Users
+//data structure to hold a single user data and some methods
 // User constructor function
 let User = function (email, password, name, date, nif, address, postal, city, telemo, isadmin) {
-    this.email = email; // User's email
-    this.password = password; // User's password
-    this.name = name; // User's name
-    this.date = date; // User's date of birth
-    this.nif = nif; // User's NIF (identification number)
-    this.address = address; // User's address
-    this.postal = postal; // User's postal code
-    this.city = city; // User's city
-    this.telemo = telemo; // User's telephone number
-    this.isadmin = isadmin; // Flag indicating if the user is an admin
+    this.email = email;
+    this.password = password;
+    this.name = name;
+    this.date = date;
+    this.nif = nif;
+    this.address = address;
+    this.postal = postal;
+    this.city = city;
+    this.telemo = telemo;
+    this.isadmin = isadmin;
 }
 
+// Methods for the User object prototype
 User.prototype = {
     verifyPass: function (email, password) {
         return ((this.email === email) && (this.password === password));
-    }, // Verifies if the provided email and password match the user's email and password
-
+    },
     getEmail: function () {
         return this.email;
-    }, // Returns the user's email
-
+    },
     getPassword: function () {
         return this.password;
-    }, // Returns the user's password
-
+    },
     getName: function () {
         return this.name;
-    }, // Returns the user's name
-
+    },
     getFName: function () {
         return this.name.split(' ')[0];
-    }, // Returns the user's first name extracted from the full name
-
+    },
     getDate: function () {
         return this.date;
-    }, // Returns the user's date of birth
-
+    },
     getNif: function () {
         return this.nif;
-    }, // Returns the user's NIF (identification number)
-
+    },
     getAddress: function () {
         return this.address;
-    }, // Returns the user's address
-
+    },
     getPostal: function () {
         return this.postal;
-    }, // Returns the user's postal code
-
+    },
     getCity: function () {
         return this.city;
-    }, // Returns the user's city
-
+    },
     getTelemo: function () {
         return this.telemo;
-    }, // Returns the user's telephone number
-
+    },
     isAdmin: function () {
         return this.isadmin;
-    }, // Checks if the user is an admin and returns a boolean value
-
-    setEmail: function (email) {
+    },
+    setEmail: function () {
         this.email = email;
-    }, // Sets the user's email to the provided email value
-
-    setPassword: function (password) {
+    },
+    setPassword: function () {
         this.password = password;
-    }, // Sets the user's password to the provided password value
-
+    },
     setName: function (name) {
         this.name = name;
-    }, // Sets the user's name to the provided name value
-
+    },
     setDate: function (date) {
         this.date = date;
-    }, // Sets the user's date of birth to the provided date value
-
+    },
     setNif: function (nif) {
         this.nif = nif;
-    }, // Sets the user's NIF (identification number) to the provided nif value
-
+    },
     setAddress: function (address) {
         this.address = address;
-    }, // Sets the user's address to the provided address value
-
+    },
     setPostal: function (postal) {
         this.postal = postal;
-    }, // Sets the user's postal code to the provided postal value
-
+    },
     setCity: function (city) {
         this.city = city;
-    }, // Sets the user's city to the provided city value
-
+    },
     setTelemo: function (telemo) {
         this.telemo = telemo;
-    }, // Sets the user's telephone number to the provided telemo value
-
+    },
+    //method that compares the current object email with the one passed as parameter
+    //the email to be compared to the current object email
     checkEmail: function (email) {
         return this.email === email;
-    } // Checks if the provided email matches the user's email and returns a boolean value
+    }
 };
-
 
 //acess to the html elements
 let topButton = 0,
@@ -149,6 +130,8 @@ let users = [];
 //index of current autehnticated user
 let userIndex = -1;
 
+/* Start of Admin function */
+// Function to create the admin area
 function createAdminArea() {
     adminAreaBtn.innerHTML = '';
     storeProducts.innerHTML = '';
@@ -159,6 +142,7 @@ function createAdminArea() {
 
     clearOutput();
 
+    // Create a table element
     let table = document.createElement('table');
     let headerRow = document.createElement('tr');
     let editUserHeader = document.createElement('th');
@@ -200,6 +184,7 @@ function createAdminArea() {
     adminArea.appendChild(table);
 }
 
+// Function to edit user data in the admin area
 function adminEditData() {
     console.log("adminEditData");
 
@@ -291,9 +276,9 @@ function adminEditData() {
     form.appendChild(document.createElement('br'));
 
     saveButton = document.createElement('button');
-    saveButton.textContent = 'Salvar';
+    saveButton.textContent = 'Guardar';
     saveButton.addEventListener('click', function (event) {
-        event.preventDefault();
+        event.preventDefault(); //previne o comportamento padrão que é enviar um formulário,
 
         users[currentUserIndex].setName(nameInput.value);
         users[currentUserIndex].setEmail(emailInput.value);
@@ -313,6 +298,7 @@ function adminEditData() {
     adminArea.appendChild(form);
 }
 
+// Function to display user information and provide navigation options in the admin area
 function adminView() {
     adminArea.innerHTML = '';
     adminAreaBtn.innerHTML = '';
@@ -429,6 +415,7 @@ function adminView() {
 
 }
 
+// Function to open or close the admin area div based on its current display status
 function openCloseAdmDiv() {
     clearCatWM();
 
@@ -439,6 +426,9 @@ function openCloseAdmDiv() {
     }
 }
 
+/* End of Admin function */
+
+// Function to open or close the login area div based on its current display status
 function openCloseLoginDiv() {
     clearCatWM();
     adminArea.innerHTML = '';
@@ -453,26 +443,29 @@ function openCloseLoginDiv() {
     document.querySelector('label[for="password"]').textContent = "Palavra-passe:";
 }
 
+// Function to process the login form submission
 function processLogin() {
     console.log("processLogin");
+
+    // Check if the email or password fields are empty
     if (emailInput.value.trim() === "" || passInput.value.trim() === "") {
         output.innerHTML = "Por favor preencha todos os campos";
         return;
     }
 
-    // Verifica se a senha atende aos requisitos de segurança
+    // Verify if the password meets the security requirements
     if (!verifyPasswordRequirements()) {
         output.innerHTML = "Palavra-passe incorreta.";
         return;
     }
 
-    // Verifica se o e-mail é válido
+    // Verify if the email is valid
     if (!verifyEmail(emailInput.value)) {
         output.innerHTML = "Email não é válido";
         return;
     }
 
-    // Verifica se existe um utilizador
+    // Check if a user exists with the provided email and password
     for (let i = 0; i < users.length; i++) {
         if (users[i].verifyPass(emailInput.value, passInput.value)) {
             userIndex = i;
@@ -480,6 +473,7 @@ function processLogin() {
         }
     }
 
+    // If a user is found, process the loggedin state
     if (userIndex !== -1) {
         processLoggedIn();
     } else {
@@ -487,10 +481,11 @@ function processLogin() {
     }
 }
 
+// Function to control the visibility of login elements
 function loginElementsVisibility(state) {
     let visibility = false;
 
-    // Verifica se o array elemetsNeededForLogin não está vazio
+    // Check if the elemetsNeededForLogin array is not empty
     if (elemetsNeededForLogin.length === 0) {
         console.error("O array elemetsNeededForLogin está vazio.");
         return;
@@ -502,46 +497,50 @@ function loginElementsVisibility(state) {
         elemetsNeededForLogin[i].style.display = visibility;
 }
 
+// Function to handle the actions after successful login
 function processLoggedIn() {
     console.log("processLoggedIn");
 
-    // Atualiza o conteúdo do elemento info
+    // Update the content of the info element
     infoData(1);
 
+    // Check if the loggedin user is an admin and adjust the display of the admin button
     if (users[userIndex].isAdmin()) {
         adminButton.style.display = 'inline-block';
     } else {
         adminButton.style.display = 'none';
     }
 
-    // Oculta os elementos de login
+    // Hide the login elements
     loginElementsVisibility(false);
 
-    // Limpa todos os campos de entrada
+    // Clear all input fields
     clearAllInput();
 
+    // Clear the output
     clearOutput();
 
-    // Altera os rótulos dos botões
+    // Modify the values of the buttons
     leftButton.value = "Editar dados";
     rightButton.value = "Logout";
 
-    // Remove os manipuladores de eventos atuais dos botões
+    // Remove the current event handlers from the buttons
     leftButton.removeEventListener("click", processLogin);
     rightButton.removeEventListener("click", processRegister);
 
-    // Adiciona novos manipuladores de eventos aos botões
+    // Add new event handlers to the buttons
     leftButton.addEventListener("click", userEdit);
     rightButton.addEventListener("click", logout);
 }
 
+// Function to handle user data editing
 function userEdit() {
     console.log("userEdit");
 
-    // Exibe os elementos correspondentes ao nome
+    // Show the elements that can be edited by the user
     registerElementsVisibility(true, ["name", "date", "address", "postal", "city", "telemo"]);
 
-    // Atualiza os dados de informação
+    // Update the information data
     infoData(2);
 
     // Mostra os dados guardados atuais
@@ -2108,7 +2107,7 @@ function createLeftMenu() {
     // Cria a label "Sobre"
     let aboutLabel = document.createElement('label');
     aboutLabel.innerHTML = 'Sobre: ';
-    
+
     // Adiciona a classe 'about-label' para estilos CSS
     aboutLabel.classList.add('about-label');
 
