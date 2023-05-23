@@ -110,6 +110,10 @@ let topButton = 0,
     sectionsMen = 0,
     storeProducts = 0,
     bagButton = 0,
+    currentSectionIndex = 0,
+    currentCategoryIndex = 0,
+    currentProductIndex = 0,
+    adminAreaBtn = 0,
     cartItemCount = 0;
 
 // user array
@@ -117,6 +121,56 @@ let users = [];
 
 //index of current autehnticated user
 let userIndex = -1;
+
+function createAdminArea() {
+
+    adminAreaBtn.innerHTML = '';
+    storeProducts.innerHTML = '';
+
+    closeLoginRegister();
+
+    clearOutput();
+
+    let table = document.createElement('table');
+    let headerRow = document.createElement('tr');
+    let editUserHeader = document.createElement('th');
+    editUserHeader.textContent = 'Editar Utilizadores';
+    headerRow.appendChild(editUserHeader);
+    let editProductHeader = document.createElement('th');
+    editProductHeader.textContent = 'Editar Produtos';
+    headerRow.appendChild(editProductHeader);
+    let addProductHeader = document.createElement('th');
+    addProductHeader.textContent = 'Adicionar Produto';
+    headerRow.appendChild(addProductHeader);
+    table.appendChild(headerRow);
+
+    let contentRow = document.createElement('tr');
+    let editUserCell = document.createElement('td');
+    let editUserButton = document.createElement('button');
+    editUserButton.textContent = 'Editar Utilizadores';
+    editUserButton.addEventListener('click', adminView);
+    editUserCell.appendChild(editUserButton);
+    contentRow.appendChild(editUserCell);
+
+    let editProductCell = document.createElement('td');
+    let editProductButton = document.createElement('button');
+    editProductButton.textContent = 'Editar Produtos';
+    editProductButton.addEventListener('click', adminEditProducts);
+    editProductCell.appendChild(editProductButton);
+    contentRow.appendChild(editProductCell);
+
+    let addProductCell = document.createElement('td');
+    let addProductButton = document.createElement('button');
+    addProductButton.textContent = 'Adicionar Produto';
+    addProductButton.addEventListener('click', adminAddProduct);
+    addProductCell.appendChild(addProductButton);
+    contentRow.appendChild(addProductCell);
+
+    table.appendChild(contentRow);
+
+    adminArea.innerHTML = '';
+    adminArea.appendChild(table);
+}
 
 function adminEditData() {
     console.log("adminEditData");
@@ -232,6 +286,9 @@ function adminEditData() {
 }
 
 function adminView() {
+    adminArea.innerHTML = '';
+    adminAreaBtn.innerHTML = '';
+
     loginProce.style.display = 'none';
 
     let next, editButton, deleteUserButton, previous, nome, email, pass, date, nif, address, postal, city, telemo;
@@ -345,6 +402,10 @@ function adminView() {
 }
 
 function openCloseLoginDiv() {
+    clearCatWM();
+    adminArea.innerHTML = '';
+    adminAreaBtn.innerHTML = '';
+
     if (loginProce.style.display === 'block') {
         loginProce.style.display = 'none';
     } else {
@@ -359,11 +420,17 @@ function processLogin() {
     if (emailInput.value.trim() === "" || passInput.value.trim() === "") {
         output.innerHTML = "Por favor preencha todos os campos";
         return;
-
     }
 
+    // Verifica se a senha atende aos requisitos de segurança
+    if (!verifyPasswordRequirements()) {
+        output.innerHTML = "Palavra-passe incorreta.";
+        return;
+    }
+
+    // Verifica se o e-mail é válido
     if (!verifyEmail(emailInput.value)) {
-        output.innerHTML = "Email não é valido";
+        output.innerHTML = "Email não é válido";
         return;
     }
 
@@ -374,16 +441,11 @@ function processLogin() {
             break;
         }
     }
+
     if (userIndex !== -1) {
         processLoggedIn();
     } else {
-        output.innerHTML = "O email " + emailInput.value + " não esta registado no nosso sistema";
-    }
-
-    // Verifica se a senha atende aos requisitos de segurança
-    if (!verifyPasswordRequirements()) {
-        output.innerHTML = "Palavra-passe incorreta.";
-        return;
+        output.innerHTML = "O email " + emailInput.value + " não está registado no nosso sistema";
     }
 }
 
@@ -735,6 +797,8 @@ function logout() {
     loginProce.style.display = 'none';
     adminButton.style.display = 'none';
     adminArea.style.display = 'none';
+    adminAreaBtn.innerHTML = '';
+    clearCatWM();
     backToLoginAfterLogout();
 }
 
@@ -937,6 +1001,423 @@ let storeData = {
     ]
 };
 
+function adminAddProduct() {
+    let form, saveButton;
+
+    adminArea.innerHTML = '';
+
+    form = document.createElement('form');
+
+    // Cria campos para as informações do produto
+    let nameLabel = document.createElement('label');
+    nameLabel.textContent = 'Nome: ';
+    form.appendChild(nameLabel);
+    let nameInput = document.createElement('input');
+    nameInput.type = 'text';
+    form.appendChild(nameInput);
+    form.appendChild(document.createElement('br'));
+
+    let precoLabel = document.createElement('label');
+    precoLabel.textContent = 'Preço: ';
+    form.appendChild(precoLabel);
+    let precoInput = document.createElement('input');
+    precoInput.type = 'number';
+    form.appendChild(precoInput);
+    form.appendChild(document.createElement('br'));
+
+    let imagemLabel = document.createElement('label');
+    imagemLabel.textContent = 'Imagem: ';
+    form.appendChild(imagemLabel);
+    let imagemInput = document.createElement('input');
+    imagemInput.type = 'text';
+    form.appendChild(imagemInput);
+    form.appendChild(document.createElement('br'));
+
+    let composicaoLabel = document.createElement('label');
+    composicaoLabel.textContent = 'Composição: ';
+    form.appendChild(composicaoLabel);
+    let composicaoInput = document.createElement('input');
+    composicaoInput.type = 'text';
+    form.appendChild(composicaoInput);
+    form.appendChild(document.createElement('br'));
+
+    let tamanhoLabel = document.createElement('label');
+    tamanhoLabel.textContent = 'Tamanho: ';
+    form.appendChild(tamanhoLabel);
+    let tamanhoInput = document.createElement('input');
+    tamanhoInput.type = 'text';
+    form.appendChild(tamanhoInput);
+    form.appendChild(document.createElement('br'));
+
+    let referenciaLabel = document.createElement('label');
+    referenciaLabel.textContent = 'Referência: ';
+    form.appendChild(referenciaLabel);
+    let referenciaInput = document.createElement('input');
+    referenciaInput.type = 'text';
+    form.appendChild(referenciaInput);
+    form.appendChild(document.createElement('br'));
+
+    let corLabel = document.createElement('label');
+    corLabel.textContent = 'Cor: ';
+    form.appendChild(corLabel);
+    let corInput = document.createElement('input');
+    corInput.type = 'text';
+    form.appendChild(corInput);
+    form.appendChild(document.createElement('br'));
+
+    let stockLabel = document.createElement('label');
+    stockLabel.textContent = 'Stock: ';
+    form.appendChild(stockLabel);
+    let stockInput = document.createElement('input');
+    stockInput.type = 'number';
+    form.appendChild(stockInput);
+    form.appendChild(document.createElement('br'));
+
+    // Cria campos para selecionar a seção e categoria
+    let sectionLabel = document.createElement('label');
+    sectionLabel.textContent = 'Seção: ';
+    form.appendChild(sectionLabel);
+    let sectionSelect = document.createElement('select');
+    for (let section of storeData.sections) {
+        let option = document.createElement('option');
+        option.value = section.name;
+        option.textContent = section.name;
+        sectionSelect.appendChild(option);
+    }
+    form.appendChild(sectionSelect);
+    form.appendChild(document.createElement('br'));
+
+    let categoryLabel = document.createElement('label');
+    categoryLabel.textContent = 'Categoria: ';
+    form.appendChild(categoryLabel);
+    let categoryInput = document.createElement('input');
+    categoryInput.type = 'text';
+    form.appendChild(categoryInput);
+    form.appendChild(document.createElement('br'));
+
+    saveButton = document.createElement('button');
+    saveButton.textContent = 'Adicionar';
+    saveButton.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        // Obtém os valores inseridos no formulário
+        let name = nameInput.value;
+        let preco = precoInput.value;
+        let imagem = imagemInput.value;
+        let composicao = composicaoInput.value;
+        let tamanho = tamanhoInput.value;
+        let referencia = referenciaInput.value;
+        let cor = corInput.value;
+        let stock = stockInput.value;
+
+        let sectionName = sectionSelect.value;
+        let categoryName = categoryInput.value;
+
+        // Cria um novo objeto de produto
+        let newProduct = {
+            nome: name,
+            preco: preco,
+            imagem: imagem,
+            composicao: composicao,
+            tamanho: tamanho,
+            referencia: referencia,
+            cor: cor,
+            stock: stock
+        };
+
+        // Adiciona o novo produto à categoria selecionada
+        for (let section of storeData.sections) {
+            if (section.name === sectionName) {
+                let categoryFound = false;
+                for (let category of section.categories) {
+                    if (category.name === categoryName) {
+                        category.products.push(newProduct);
+                        categoryFound = true;
+                        break;
+                    }
+                }
+                if (!categoryFound) {
+                    // Cria uma nova categoria se ela não existir
+                    section.categories.push({
+                        name: categoryName,
+                        products: [newProduct]
+                    });
+                }
+                break;
+            }
+        }
+
+        output.innerHTML = 'Produto adicionado com sucesso.';
+    });
+
+    form.appendChild(saveButton);
+
+    closeButton = document.createElement('button');
+    closeButton.textContent = 'Fechar';
+    closeButton.addEventListener('click', function () {
+        adminArea.innerHTML = '';
+    });
+
+    form.appendChild(closeButton);
+
+    adminArea.appendChild(form);
+}
+
+function displayProduct() {
+    adminArea.innerHTML = ''; // Limpa o conteúdo anterior
+
+    let section = storeData.sections[currentSectionIndex];
+    let category = section.categories[currentCategoryIndex];
+    let product = category.products[currentProductIndex];
+
+    let adminAreaTitle = document.createElement('h3');
+    adminAreaTitle.textContent = `Seção: ${section.name}`;
+    adminArea.appendChild(adminAreaTitle);
+
+    let adminAreaCategory = document.createElement('h4');
+    adminAreaCategory.textContent = `Categoria: ${category.name}`;
+    adminArea.appendChild(adminAreaCategory);
+
+    let adminAreaProduct = document.createElement('h4');
+    adminAreaProduct.textContent = `Produto: ${product.nome}`;
+    adminArea.appendChild(adminAreaProduct);
+
+    let adminAreaImage = document.createElement('img');
+    adminAreaImage.src = product.imagem;
+    adminAreaImage.alt = product.nome;
+    adminArea.appendChild(adminAreaImage);
+
+    let adminAreaPrice = document.createElement('p');
+    adminAreaPrice.textContent = `Preço: ${product.preco}€`;
+    adminArea.appendChild(adminAreaPrice);
+
+    let adminAreaComposition = document.createElement('p');
+    adminAreaComposition.textContent = `Composição: ${product.composicao}`;
+    adminArea.appendChild(adminAreaComposition);
+
+    let adminAreaSize = document.createElement('p');
+    adminAreaSize.textContent = `Tamanho: ${product.tamanho}`;
+    adminArea.appendChild(adminAreaSize);
+
+    let adminAreaReference = document.createElement('p');
+    adminAreaReference.textContent = `Referência: ${product.referencia}`;
+    adminArea.appendChild(adminAreaReference);
+
+    let adminAreaColor = document.createElement('p');
+    adminAreaColor.textContent = `Cor: ${product.cor}`;
+    adminArea.appendChild(adminAreaColor);
+}
+
+function nextProduct() {
+    let section = storeData.sections[currentSectionIndex];
+    let category = section.categories[currentCategoryIndex];
+    let productCount = category.products.length;
+
+    displayProduct();
+
+    if (currentProductIndex < productCount - 1) {
+        currentProductIndex++;
+    } else if (currentCategoryIndex < section.categories.length - 1) {
+        currentCategoryIndex++;
+        currentProductIndex = 0;
+    } else if (currentSectionIndex < storeData.sections.length - 1) {
+        currentSectionIndex++;
+        currentCategoryIndex = 0;
+        currentProductIndex = 0;
+    }
+}
+
+function previousProduct() {
+    let section = storeData.sections[currentSectionIndex];
+    let category = section.categories[currentCategoryIndex];
+    let productCount = category.products.length;
+
+    displayProduct();
+
+    if (currentProductIndex > 0) {
+        currentProductIndex--;
+    } else if (currentCategoryIndex > 0) {
+        currentCategoryIndex--;
+        currentProductIndex = storeData.sections[currentSectionIndex].categories[currentCategoryIndex].products.length - 1;
+    } else if (currentSectionIndex > 0) {
+        currentSectionIndex--;
+        currentCategoryIndex = storeData.sections[currentSectionIndex].categories.length - 1;
+        currentProductIndex = storeData.sections[currentSectionIndex].categories[currentCategoryIndex].products.length - 1;
+    }
+
+}
+
+function editProduct() {
+    let product = getCurrentProduct(); // Obtém o produto atualmente exibido na função displayProduct()
+
+    // Limpa o conteúdo da área de administração
+    adminArea.innerHTML = '';
+    adminAreaBtn.innerHTML = '';
+
+    let form = document.createElement('form');
+
+    // Cria campos para as informações do produto
+    let nameLabel = document.createElement('label');
+    nameLabel.textContent = 'Nome: ';
+    form.appendChild(nameLabel);
+    let nameInput = document.createElement('input');
+    nameInput.type = 'text';
+    nameInput.value = product.nome; // Preenche o campo com o nome atual do produto
+    form.appendChild(nameInput);
+    form.appendChild(document.createElement('br'));
+
+    let precoLabel = document.createElement('label');
+    precoLabel.textContent = 'Preço: ';
+    form.appendChild(precoLabel);
+    let precoInput = document.createElement('input');
+    precoInput.type = 'number';
+    precoInput.value = product.preco; // Preenche o campo com o preço atual do produto
+    form.appendChild(precoInput);
+    form.appendChild(document.createElement('br'));
+
+    let imagemLabel = document.createElement('label');
+    imagemLabel.textContent = 'Imagem: ';
+    form.appendChild(imagemLabel);
+    let imagemInput = document.createElement('input');
+    imagemInput.type = 'text';
+    imagemInput.value = product.imagem; // Preenche o campo com a imagem atual do produto
+    form.appendChild(imagemInput);
+    form.appendChild(document.createElement('br'));
+
+    let composicaoLabel = document.createElement('label');
+    composicaoLabel.textContent = 'Composição: ';
+    form.appendChild(composicaoLabel);
+    let composicaoInput = document.createElement('input');
+    composicaoInput.type = 'text';
+    composicaoInput.value = product.composicao; // Preenche o campo com a composição atual do produto
+    form.appendChild(composicaoInput);
+    form.appendChild(document.createElement('br'));
+
+    let tamanhoLabel = document.createElement('label');
+    tamanhoLabel.textContent = 'Tamanho: ';
+    form.appendChild(tamanhoLabel);
+    let tamanhoInput = document.createElement('input');
+    tamanhoInput.type = 'text';
+    tamanhoInput.value = product.tamanho; // Preenche o campo com o tamanho atual do produto
+    form.appendChild(tamanhoInput);
+    form.appendChild(document.createElement('br'));
+
+    let referenciaLabel = document.createElement('label');
+    referenciaLabel.textContent = 'Referência: ';
+    form.appendChild(referenciaLabel);
+    let referenciaInput = document.createElement('input');
+    referenciaInput.type = 'text';
+    referenciaInput.value = product.referencia; // Preenche o campo com a referência atual do produto
+    form.appendChild(referenciaInput);
+    form.appendChild(document.createElement('br'));
+
+    let corLabel = document.createElement('label');
+    corLabel.textContent = 'Cor: ';
+    form.appendChild(corLabel);
+    let corInput = document.createElement('input');
+    corInput.type = 'text';
+    corInput.value = product.cor; // Preenche o campo com a cor atual do produto
+    form.appendChild(corInput);
+    form.appendChild(document.createElement('br'));
+
+    let stockLabel = document.createElement('label');
+    stockLabel.textContent = 'Stock: ';
+    form.appendChild(stockLabel);
+    let stockInput = document.createElement('input');
+    stockInput.type = 'number';
+    stockInput.value = product.stock; // Preenche o campo com o stock atual do produto
+    form.appendChild(stockInput);
+    form.appendChild(document.createElement('br'));
+
+    // Crie o botão de salvamento
+    let saveButton = document.createElement('button');
+    saveButton.textContent = 'Guardar';
+    saveButton.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        // Atualize os valores do produto com base nos campos do formulário
+        product.nome = nameInput.value;
+        product.preco = precoInput.value;
+        product.imagem = imagemInput.value;
+        product.composicao = composicaoInput.value;
+        product.tamanho = tamanhoInput.value;
+        product.referencia = referenciaInput.value;
+        product.cor = corInput.value;
+        product.stock = stockInput.value;
+        // Atualize os outros atributos do produto da mesma forma
+
+        // Exiba uma mensagem indicando que o produto foi editado com sucesso
+        output.innerHTML = 'Produto editado com sucesso.';
+    });
+
+    let backButton = document.createElement('button');
+    backButton.textContent = 'Voltar';
+    backButton.addEventListener('click', function () {
+        adminEditProducts(); // Função para exibir a lista de produtos novamente
+    });
+
+    form.appendChild(backButton);
+
+    // Crie o botão de fechar
+    let closeButton = document.createElement('button');
+    closeButton.textContent = 'Fechar';
+    closeButton.addEventListener('click', function () {
+        adminArea.innerHTML = '';
+    });
+
+    // Adicione os campos do formulário e os botões à área de administração
+    form.appendChild(saveButton);
+    form.appendChild(closeButton);
+    adminArea.appendChild(form);
+}
+
+function adminEditProducts() {
+    adminArea.innerHTML = ''; // Limpa o conteúdo anterior
+    adminAreaBtn.innerHTML = '';
+
+    clearOutput();
+
+    let closeButton = document.createElement('button');
+    let previousButton = document.createElement('button');
+    let nextButton = document.createElement('button');
+    let editButton = document.createElement('button');
+
+    displayProduct();
+
+    closeButton.textContent = 'Fechar';
+    closeButton.addEventListener('click', closeAdminArea);
+    adminAreaBtn.appendChild(closeButton);
+
+    previousButton.textContent = 'Recuar';
+    previousButton.addEventListener('click', previousProduct);
+    adminAreaBtn.appendChild(previousButton);
+
+    nextButton.textContent = 'Avançar';
+    nextButton.addEventListener('click', nextProduct);
+    adminAreaBtn.appendChild(nextButton);
+
+    editButton.textContent = 'Editar';
+    editButton.addEventListener('click', editProduct);
+    adminAreaBtn.appendChild(editButton);
+
+
+}
+
+function closeAdminArea() {
+    adminArea.innerHTML = '';
+    currentSectionIndex = 0;
+    currentCategoryIndex = 0;
+    currentProductIndex = 0;
+}
+
+function getCurrentProduct() {
+    let currentSection = storeData.sections[currentSectionIndex];
+    let currentCategory = currentSection.categories[currentCategoryIndex];
+    let currentProduct = currentCategory.products[currentProductIndex];
+
+    return currentProduct;
+}
+
 function getSectionName(sectionName, categoryName) {
     for (let section of storeData.sections) {
         if (section.name === sectionName) {
@@ -972,7 +1453,6 @@ function getCategoryName(category) {
         }
     }
 }
-
 
 function showWomenCategory() {
     let casaco, camisola, tshirt, calca;
@@ -1178,23 +1658,259 @@ function hideShopBag() {
 function createCartHTML() {
     // Cria a estrutura HTML do carrinho de compras
     let cartHTML = `
-        <h2>Carrinho de compras</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Produto</th>
-                    <th>Preço</th>
-                    <th>Quantidade</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody id="cart-items">
-            </tbody>
-        </table>
-        <p>Total do carrinho: <span id="cart-total"></span></p>
+      <h2>Saco de compras</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Produto</th>
+            <th>Imagem</th>
+            <th>Preço</th>
+            <th>Quantidade</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody id="cart-items">
+        </tbody>
+      </table>
+      <p>Total do carrinho: <span id="cart-total"></span></p>
+      <button id="checkout-button">Finalizar Encomenda</button>
     `;
+
     cartContainer.innerHTML = cartHTML;
     hideShopBag();
+
+    // Adiciona evento ao botão "Finalizar Encomenda"
+    let checkoutButton = document.getElementById('checkout-button');
+    checkoutButton.addEventListener('click', function () {
+        processCheckout();
+    });
+}
+
+function processCheckout() {
+    // Verifica se o utilizador está logado
+    if (userIndex !== -1) {
+        // Utilizador logado
+        let user = users[userIndex];
+        let name = user.getName();
+        let email = user.getEmail();
+        let nif = user.getNif();
+        let address = user.getAddress();
+        let postal = user.getPostal();
+        let city = user.getCity();
+        let telemo = user.getTelemo();
+
+        // Realiza a validação dos dados
+        if (!name || !email || !nif || !address || !postal || !city || !telemo) {
+            output.innerHTML = "Por favor, preencha todos os campos obrigatórios.";
+            return;
+        }
+
+        // Dados do utilizador válidos, finaliza a encomenda
+        completeOrder(name, email, nif, address, postal, city, telemo);
+    } else {
+        // Utilizador não logado, permite preencher os dados
+        showCheckoutForm();
+    }
+}
+
+function showCheckoutForm() {
+    // Limpa o output
+    clearOutput();
+
+    // Cria os elementos do formulário de dados de envio
+    let formHTML = `
+      <h3 class="form-title">Dados do Utilizador</h3>
+      <label for="name-input">Nome:</label>
+      <input type="text" id="name-input" class="form-input" required>
+      <label for="email-input">Email:</label>
+      <input type="email" id="email-input" class="form-input" required>
+      <label for="nif-input">NIF:</label>
+      <input type="text" id="nif-input" class="form-input" required>
+      <label for="address-input">Morada:</label>
+      <input type="text" id="address-input" class="form-input" required>
+      <label for="postal-input">Código Postal:</label>
+      <input type="text" id="postal-input" class="form-input" required>
+      <label for="city-input">Cidade:</label>
+      <input type="text" id="city-input" class="form-input" required>
+      <label for="telemo-input">Telemóvel:</label>
+      <input type="text" id="telemo-input" class="form-input" required>
+      <button id="confirm-shipping-button" class="form-button">Confirmar Dados de Envio</button>
+    `;
+
+    // Renderiza o formulário de dados de envio
+    output.innerHTML = formHTML;
+
+    // Adiciona evento ao botão "Confirmar Dados de Envio"
+    let confirmShippingButton = document.getElementById('confirm-shipping-button');
+    confirmShippingButton.addEventListener('click', function () {
+        showPaymentForm();
+    });
+}
+
+function showPaymentForm() {
+    // Limpa o output
+    clearOutput();
+
+    // Cria os elementos do formulário de escolha da forma de pagamento e chave de pagamento
+    let formHTML = `
+      <h3 class="form-title">Forma de Pagamento</h3>
+      <label for="payment-method">Escolha a forma de pagamento:</label>
+      <select id="payment-method" class="form-input">
+      <option value="chave">Cobrança</option>
+        <option value="chave">Chave de Pagamento</option>
+      </select>
+      <div id="payment-key-section" style="display: none;">
+        <label for="payment-key-input">Chave de Pagamento:</label>
+        <input type="text" id="payment-key-input" class="form-input" required>
+      </div>
+      <button id="confirm-payment-button" class="form-button">Confirmar Pagamento</button>
+    `;
+
+    // Renderiza o formulário de escolha da forma de pagamento
+    output.innerHTML = formHTML;
+
+    // Adiciona evento ao botão "Confirmar Pagamento"
+    let confirmPaymentButton = document.getElementById('confirm-payment-button');
+    confirmPaymentButton.addEventListener('click', function () {
+        validatePaymentForm();
+    });
+
+    // Adiciona evento ao select da forma de pagamento
+    let paymentMethodSelect = document.getElementById('payment-method');
+    paymentMethodSelect.addEventListener('change', function () {
+        togglePaymentKeySection();
+    });
+}
+
+function togglePaymentKeySection() {
+    let paymentMethodSelect = document.getElementById('payment-method');
+    let paymentKeySection = document.getElementById('payment-key-section');
+    let selectedOption = paymentMethodSelect.value;
+
+    if (selectedOption === 'chave') {
+        paymentKeySection.style.display = 'block';
+    } else {
+        paymentKeySection.style.display = 'none';
+    }
+}
+
+function validatePaymentForm() {
+    let paymentMethodSelect = document.getElementById('payment-method');
+    let paymentKeyInput = document.getElementById('payment-key-input');
+    let paymentMethod = paymentMethodSelect.value;
+    let paymentKey = paymentKeyInput.value;
+
+    if (paymentMethod === 'chave' && isValidPaymentKey(paymentKey)) {
+        completeOrder(name, email, nif, address, postal, city, telemo);
+    } else {
+        output.innerHTML = "Chave de pagamento inválida. Encomenda não pode ser finalizada.";
+    }
+}
+
+function validateCheckoutForm() {
+    // Obtém os valores dos campos do formulário
+    let name = document.getElementById('name-input').value;
+    let email = document.getElementById('email-input').value;
+    let nif = document.getElementById('nif-input').value;
+    let address = document.getElementById('address-input').value;
+    let postal = document.getElementById('postal-input').value;
+    let city = document.getElementById('city-input').value;
+    let telemo = document.getElementById('telemo-input').value;
+
+    // Realiza a validação dos dados
+    if (!name || !email || !nif || !address || !postal || !city || !telemo) {
+        output.innerHTML = "Por favor, preencha todos os campos obrigatórios.";
+        return;
+    }
+
+    // Dados do utilizador válidos, finaliza a encomenda
+    completeOrder(name, email, nif, address, postal, city, telemo);
+}
+
+function completeOrder(name, email, nif, address, postal, city, telemo) {
+    // Limpa o output
+    clearOutput();
+
+    // Realiza o processamento necessário para finalizar a encomenda
+    // ...
+
+    // Obtém o valor da caixa de texto da chave de pagamento
+    const paymentKeyInput = document.getElementById('payment-key-input');
+    const paymentKey = paymentKeyInput.value;
+
+    // Verifica se a chave de pagamento é válida
+    if (isValidPaymentKey(paymentKey)) {
+        output.innerHTML = "Encomenda efetuada com sucesso.";
+    } else {
+        output.innerHTML = "Chave de pagamento inválida. Encomenda não pode ser finalizada.";
+    }
+}
+
+function isValidPaymentKey(paymentKey) {
+    // Defina a lista de chaves de pagamento aceitas
+    const acceptedKeys = ["865sh78f6hny89u9", "3fg1m43n134jhw"];
+
+    // Verifique se a chave de pagamento está na lista de chaves aceitas
+    return acceptedKeys.includes(paymentKey);
+}
+
+function updateCart() {
+    // Limpa os itens do carrinho anteriores
+    let cartItemsElement = document.getElementById('cart-items');
+    cartItemsElement.innerHTML = '';
+
+    // Adiciona os itens do carrinho à tabela
+    let cartTotal = 0;
+    for (let item of cart) {
+        let productTotal = item.product.preco * item.quantity;
+        cartTotal += productTotal;
+        let itemElement = document.createElement('tr');
+        itemElement.innerHTML = `
+        <td>${item.product.nome}</td>
+        <td><img src="${item.product.imagem}" width="50" height="50"></td>
+        <td>${item.product.preco}€</td>
+        <td>
+            <button class="decrease-quantity">-</button>
+            ${item.quantity}
+            <button class="increase-quantity">+</button>
+        </td>
+        <td>${productTotal}€</td>
+        <td><button class="remove-from-cart">Remover</button></td>
+        `;
+        cartItemsElement.appendChild(itemElement);
+
+        // Adiciona eventos aos botões
+        let decreaseQuantityButton = itemElement.querySelector('.decrease-quantity');
+        decreaseQuantityButton.addEventListener('click', function () {
+            decreaseQuantity(item.product.referencia);
+        });
+        let increaseQuantityButton = itemElement.querySelector('.increase-quantity');
+        increaseQuantityButton.addEventListener('click', function () {
+            increaseQuantity(item.product.referencia);
+        });
+        let removeFromCartButton = itemElement.querySelector('.remove-from-cart');
+        removeFromCartButton.addEventListener('click', function () {
+            removeFromCart(item.product.referencia);
+        });
+
+
+    }
+
+    // Adiciona o botão Limpar carrinho
+    let clearCartButton = document.createElement('button');
+    clearCartButton.textContent = 'Limpar carrinho';
+    clearCartButton.id = 'clear-cart-button'; // Adiciona um ID ao botão
+    cartItemsElement.appendChild(clearCartButton);
+    clearCartButton.addEventListener('click', function () {
+        removeAll();
+    });
+
+    // Atualiza o total do carrinho
+    let cartTotalElement = document.getElementById('cart-total');
+    cartTotalElement.textContent = `${cartTotal}€`;
+
+    // Atualiza a contagem de itens no carrinho
+    updateCartCount();
 }
 
 function addToCart(product) {
@@ -1226,63 +1942,6 @@ function addToCart(product) {
     // Atualiza a contagem de itens no carrinho
     updateCartCount();
 }
-
-function updateCart() {
-    // Limpa os itens do carrinho anteriores
-    let cartItemsElement = document.getElementById('cart-items');
-    cartItemsElement.innerHTML = '';
-
-    // Adiciona os itens do carrinho à tabela
-    let cartTotal = 0;
-    for (let item of cart) {
-        let productTotal = item.product.preco * item.quantity;
-        cartTotal += productTotal;
-        let itemElement = document.createElement('tr');
-        itemElement.innerHTML = `
-            <td>${item.product.nome}</td>
-            <td>${item.product.preco}€</td>
-            <td>
-                <button class="decrease-quantity">-</button>
-                ${item.quantity}
-                <button class="increase-quantity">+</button>
-            </td>
-            <td>${productTotal}€</td>
-            <td><button class="remove-from-cart">Remover</button></td>
-        `;
-        cartItemsElement.appendChild(itemElement);
-
-        // Adiciona eventos aos botões
-        let decreaseQuantityButton = itemElement.querySelector('.decrease-quantity');
-        decreaseQuantityButton.addEventListener('click', function () {
-            decreaseQuantity(item.product.referencia);
-        });
-        let increaseQuantityButton = itemElement.querySelector('.increase-quantity');
-        increaseQuantityButton.addEventListener('click', function () {
-            increaseQuantity(item.product.referencia);
-        });
-        let removeFromCartButton = itemElement.querySelector('.remove-from-cart');
-        removeFromCartButton.addEventListener('click', function () {
-            removeFromCart(item.product.referencia);
-        });
-
-    
-    }
-
-     // Adiciona o botão Limpar carrinho
-     let clearCartButton = document.createElement('button');
-     clearCartButton.textContent = 'Limpar carrinho';
-     cartItemsElement.appendChild(clearCartButton);
-     clearCartButton.addEventListener('click', function () {
-         removeAll();
-     });
-
-      // Atualiza o total do carrinho
-      let cartTotalElement = document.getElementById('cart-total');
-      cartTotalElement.textContent = `${cartTotal}€`;
-  
-      // Atualiza a contagem de itens no carrinho
-      updateCartCount();
-  }
 
 function updateCartCount() {
     // Calcula o número de itens no carrinho
@@ -1376,11 +2035,11 @@ function removeAll() {
 
 window.onload = function () {
     users.push(
-        new User("antcos@gov.pt", "Aa12345", "Antonio Costa", "1999-09-22", "123456789",
-            "Largo da Ratisse", "4795-342", "Lisboa", 912345678, true));
+        new User("admin@clothess.pt", "Aa12345", "Administrator João", "1991-09-22", "123456789",
+            "Rua Principal", "6200-001", "Covilhã", 912345678, true));
 
     users.push(
-        new User("mariasilva@gov.pt", "Bb12345", "Maria Silva", "1998-08-21", "987654321",
+        new User("ana@ipcb.pt", "Bb12345", "Ana Pinto", "2003-12-07", "987654321",
             "Rua das Flores", "1234-567", "Porto", 987654321, false));
 
     // Obtém os IDs dos botões
@@ -1417,6 +2076,7 @@ window.onload = function () {
     emailInput = document.getElementById('email');
     passInput = document.getElementById('password');
     adminArea = document.getElementById('admin-area');
+    adminAreaBtn = document.getElementById('admin-areabtn');
     searchBox = document.getElementById('sbox');
 
 
@@ -1432,7 +2092,7 @@ window.onload = function () {
 
     leftButton.addEventListener('click', processLogin);
     rightButton.addEventListener('click', processRegister);
-    adminButton.addEventListener('click', adminView);
+    adminButton.addEventListener('click', createAdminArea);
     bagButton.addEventListener('click', showShopBag);
 
     searchBox.addEventListener('input', () => searchProducts(searchBox.value));
