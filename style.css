@@ -1,8 +1,9 @@
+/*Background color of the page*/
 body {
   background-color: #fdf9f8;
 }
 
-/* Estilos para barra do topo */
+/* Styles for the top bar */
 .top-bar {
   background-color: #faeddc;
   color: #000000;
@@ -10,18 +11,18 @@ body {
   text-align: center;
 }
 
-/* Estilos para o ícone do menu */
+/* Styles for the menu icon */
 .top-menu img {
   vertical-align: middle;
 }
 
-/* Estilos para o texto do menu */
+/* Styles for the menu text */
 .menu-text {
   margin-left: 2px;
   color:#691a03;
 }
 
-/* Estilos para a caixa de pesquisa */
+/* Styles for the search box */
 .search-box {
   width: 200px;
   padding: 5px;
@@ -31,14 +32,12 @@ body {
   font-size: 14px;
 }
 
-/* Estilos para o logo */
-
+/* Styles for the logo */
 .logo-container {
-  float: none;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
   align-items: center;
+  width: 100%;
+  display: center;
+  justify-content: space-between;
 }
 
 .logo-img {
@@ -48,8 +47,7 @@ body {
   margin: 0 auto;
 }
 
-/* Estilos para as secçoes */
-
+/* Styles for the sections */
 .top-sections {
   padding: 10px;
   text-align: left;
@@ -69,7 +67,6 @@ body {
 
 #sections-w,
 #sections-m {
-  /* Estilos para as seções */
   display: inline-block;
   color: #691a03;
   margin-left: 20px;
@@ -81,6 +78,7 @@ body {
   color: #FF0000; 
 }
 
+/* Styles for image in the center of the index.htlm */
 .promo-container {
   float: none;
   width: 100%;
@@ -96,20 +94,7 @@ body {
   margin: 0 auto;
 }
 
-.adm-table {
-  border: 1px solid black;
-  border-collapse: collapse;
-  width: 50%;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.adm-img {
-  max-width: 200px;
-  height: auto;
-  align-items: center;
-}
-
+/* Styles for Login and Shopping Bag*/
 .user-texts {
   float: right;
   margin-top: 10px;
@@ -118,7 +103,6 @@ body {
 }
 
 .user-texts #log-button-text,
-.fav-button-text,
 .cart-button-text {
   display: inline-block;
   color:#691a03;
@@ -128,11 +112,6 @@ body {
 
 .log-button {
   margin-right: 20px; 
-}
-
-.fav-button {
-  margin-right: 20px; 
-  margin-left: 20px;
 }
 
 .cart-button {
@@ -145,7 +124,7 @@ body {
   text-align: center;
 }
 
-
+/* Styles for the login and registration */
 #login-proce h1, #login-proce h2 {
   text-align: left;
 }
@@ -224,15 +203,18 @@ body {
   background-color: red;
 }
 
+/* Styles for the output htlm */
 #output {
   text-align: center;
   font-weight: bold;
 }
 
+/* Styles for the admin-area htlm */
 #admin-area {
   display: block;
 }
 
+/* Styles for the shopping bag */
 .addtocartbutton {
   display: inline-block;
   width: 200px;
@@ -254,9 +236,6 @@ body {
   margin: 30px;
 }
 
-/*Shop Bag*/
-
-/* Estilos para o carrinho de compras */
 #cart-container {
   text-align: center;
 }
@@ -330,8 +309,7 @@ body {
 }
 
 
-/*Store Produtc*/
-
+/* Styles for Store Produtcs */
 .product {
   display: inline-block;
   margin: 30px;
@@ -387,34 +365,90 @@ body {
 .form-title {
   color: #691a03;
   font-size: 20px;
-  /* Outras propriedades de estilo */
 }
 
 .form-input {
   display: block;
   border: 1px solid gray;
   padding: 5px;
-  /* Outras propriedades de estilo */
 }
 
-/* Estilo para as labels */
 .form-label {
   display: block;
-  text-align: center; /* Centralizar as labels */
+  text-align: center;
 }
 
-/* Estilo para as caixas de texto */
+/* Styles for the shopping bag 2 part */
+
 .form-input[type="text"],
 .form-input[type="email"] {
   display: block;
   border: 1px solid gray;
   padding: 5px;
-  margin: 0 auto; /* Centralizar as caixas de texto */
-  text-align: left; /* Alinhar o texto à esquerda nas caixas de texto */
+  margin: 0 auto; 
+  text-align: left; 
 }
 
 .form-button {
   background-color: green;
   color: white;
-  /* Outras propriedades de estilo */
+}
+
+.finish-order-button {
+  display: inline-block;
+  width: 200px;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #691a03;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.checkout-button{
+  display: inline-block;
+  width: 200px;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #691a03;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+/* Styles for the left menu*/
+
+.sidebar-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.about-label {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.info-label {
+  font-size: 16px;
+  text-align: center;
+  line-height: 1.5;
 }

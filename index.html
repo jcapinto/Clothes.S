@@ -12,13 +12,16 @@
 </head>
 
 <body>
+  <!--Area to create the left-side Menu-->
+  <div id="sidebar-menu"></div>
+  <!--Promotion or advertising banner-->
   <div class="top-bar">
     <p>Entrega GRÁTIS para compras superiores a 20€</p>
   </div>
-  <!--Menu e icone de pesquisa-->
+  <!--Menu and search icon-->
   <table class="top-menu">
     <tr>
-      <td>
+      <td id="left-menu-btn">
         <img src="img/menico.png" alt="Menu" width="25" height="25">
         <span class="menu-text">Menu</span>
       </td>
@@ -29,29 +32,23 @@
   </table>
   <!--Logo-->
   <div class="logo-container">
-    <img src="img/logo.png" alt="Logo" class="logo-img">
+    <a href="index.html">
+      <img src="img/logo.png" alt="Logo" class="logo-img">
+    </a>
   </div>
-  <!--Login, Favoritos e Saco de compras-->
+ <!--Login and Shopping Bag-->
   <div class="user-texts">
-
     <div id="log-button">
       <img id="iconlfc" src="img/logico.png" alt="Login" width="20" height="20">
       <span id="log-button-text">Login</span>
     </div>
-
-    <div class="fav-button">
-      <img id="iconlfc" src="img/favico.png" alt="Favoritos" width="20" height="20">
-      <span class="fav-button-text">Favoritos</span>
-    </div>
-
     <div id="shopBag" class="cart-button">
       <img id="iconlfc" src="img/carico.png" alt="Saco de compras" width="20" height="20">
       <span class="cart-button-text">Saco de compras (0)</span>
     </div>
-
   </div>
-
   <p></p>
+  <!--Sections top bar-->
   <div class="top-sections">
     <div id="sections-w">
       <span>Mulheres</span>
@@ -111,11 +108,10 @@
       <input type="button" value="Fechar" id="close-logbtn">
     </div>
   </div>
+  <!--HTML divs for manipulation in JavaScript-->
   <div id="cat-w">
   </div>
   <div id="cat-m">
-  </div>
-  <div id="cat-a">
   </div>
   <div id="admin-area">
   </div>
@@ -127,10 +123,9 @@
   </div>
   <p id="output">
   </p>
+  <!-- Promotional image in the center of the index.htlm -->
   <div class="promo-container">
     <img src="img/promo.png" alt="promo" class="promo-img">
   </div>
-
 </body>
-
 </html>
