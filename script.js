@@ -17,71 +17,93 @@ let User = function (email, password, name, date, nif, address, postal, city, te
 User.prototype = {
     verifyPass: function (email, password) {
         return ((this.email === email) && (this.password === password));
-    },
+    }, // Verifies if the provided email and password match the user's email and password
+
     getEmail: function () {
         return this.email;
-    },
+    }, // Returns the user's email
+
     getPassword: function () {
         return this.password;
-    },
+    }, // Returns the user's password
+
     getName: function () {
         return this.name;
-    },
+    }, // Returns the user's name
+
     getFName: function () {
         return this.name.split(' ')[0];
-    },
+    }, // Returns the user's first name extracted from the full name
+
     getDate: function () {
         return this.date;
-    },
+    }, // Returns the user's date of birth
+
     getNif: function () {
         return this.nif;
-    },
+    }, // Returns the user's NIF (identification number)
+
     getAddress: function () {
         return this.address;
-    },
+    }, // Returns the user's address
+
     getPostal: function () {
         return this.postal;
-    },
+    }, // Returns the user's postal code
+
     getCity: function () {
         return this.city;
-    },
+    }, // Returns the user's city
+
     getTelemo: function () {
         return this.telemo;
-    },
+    }, // Returns the user's telephone number
+
     isAdmin: function () {
         return this.isadmin;
-    },
-    setEmail: function () {
+    }, // Checks if the user is an admin and returns a boolean value
+
+    setEmail: function (email) {
         this.email = email;
-    },
-    setPassword: function () {
+    }, // Sets the user's email to the provided email value
+
+    setPassword: function (password) {
         this.password = password;
-    },
+    }, // Sets the user's password to the provided password value
+
     setName: function (name) {
         this.name = name;
-    },
+    }, // Sets the user's name to the provided name value
+
     setDate: function (date) {
         this.date = date;
-    },
+    }, // Sets the user's date of birth to the provided date value
+
     setNif: function (nif) {
         this.nif = nif;
-    },
+    }, // Sets the user's NIF (identification number) to the provided nif value
+
     setAddress: function (address) {
         this.address = address;
-    },
+    }, // Sets the user's address to the provided address value
+
     setPostal: function (postal) {
         this.postal = postal;
-    },
+    }, // Sets the user's postal code to the provided postal value
+
     setCity: function (city) {
         this.city = city;
-    },
+    }, // Sets the user's city to the provided city value
+
     setTelemo: function (telemo) {
         this.telemo = telemo;
-    },
+    }, // Sets the user's telephone number to the provided telemo value
+
     checkEmail: function (email) {
         return this.email === email;
-    }
+    } // Checks if the provided email matches the user's email and returns a boolean value
 };
+
 
 //acess to the html elements
 let topButton = 0,
